@@ -42,11 +42,7 @@ namespace NumericalSequence
                 {
                     throw new InvalidOperationException();
                 }
-                else
-                {
-                    return _position;
-
-                }
+                return _position;
             }
         } 
 

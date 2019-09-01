@@ -4,24 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UserInterface;
-using Validation;
 
-namespace NumericalSequence
+namespace Fibonacci
 {
     class Application
     {
-        private const string INVALID_NUMBER_OF_ARGS = "You must input 1 argument.";
-        private const string INVALID_FORMAT = "Argument must be a natural number. Try again.";
-        private const string HELP = "Enter the number to get a sequence of natural numbers whose square is less than a given number.";
+        private const string INVALID_NUMBER_OF_ARGS = "You must input 2 arguments. Try again.";
+        private const string INVALID_FORMAT = "Arguments must be numbers. Try again.";
+        private const string INVALID_SIZE = "Second argument must be greater than first. Try again.";
+        private const string HELP = "Enter the range for the Fibonacci sequence.";
 
-        private const int ARGS_LENGTH = 1;
-        private const int MIN_VALUE = 2;
+        private const int ARGS_LENGTH = 2;
 
         private ISequenceValidator _validator;
 
         public Application()
         {
-            _validator = new SequenceValidator(ARGS_LENGTH, MIN_VALUE);
+            _validator = new SequenceValidator(ARGS_LENGTH);
         }
 
         public void Run(string[] args)
@@ -32,7 +31,7 @@ namespace NumericalSequence
             }
             else
             {
-                NumericalSequence sequence = GetSequence(args);
+                FibonacciSequence sequence = GetSequence(args);
                 if (sequence != null)
                 {
                     RunWithSequence(sequence);
@@ -40,14 +39,14 @@ namespace NumericalSequence
             }
         }
 
-        private void RunWithSequence(NumericalSequence sequence)
+        private void RunWithSequence(FibonacciSequence sequence)
         {
             UI.ShowMessage(sequence.ToString());
         }
 
-        public NumericalSequence GetSequence(string[] args)
+        public FibonacciSequence GetSequence(string[] args)
         {
-            NumericalSequence sequence = null;
+            FibonacciSequence sequence = null;
 
             if (!_validator.IsNumberOfArgsValid(args))
             {
@@ -63,20 +62,19 @@ namespace NumericalSequence
                 return sequence;
             }
 
-            int number = Convert.ToInt32(args[0]);
+            int minNumber = Convert.ToInt32(args[0]);
+            int maxNumber = Convert.ToInt32(args[1]);
 
-            if (!_validator.IsValueValid(number))
+            if (!_validator.IsValuesValid(minNumber, maxNumber))
             {
-                UI.ShowMessage(INVALID_FORMAT);
+                UI.ShowMessage(INVALID_SIZE);
 
                 return sequence;
             }
 
-            sequence = new NumericalSequence(number);
+            sequence = new FibonacciSequence(minNumber, maxNumber);
 
             return sequence;
         }
-
-
     }
 }

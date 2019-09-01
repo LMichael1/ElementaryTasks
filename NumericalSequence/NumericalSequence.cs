@@ -9,9 +9,9 @@ namespace NumericalSequence
 {
     class NumericalSequence : IEnumerable<int>
     {
-        #region Properties
+        #region Fields
 
-        public int Count { get; }
+        private int _maxNumber;
 
         #endregion
 
@@ -19,7 +19,7 @@ namespace NumericalSequence
         {
             get
             {
-                if (index < Count)
+                if (index < _maxNumber)
                 {
                     return index + 1;
                 }
@@ -32,7 +32,7 @@ namespace NumericalSequence
 
         public NumericalSequence(int n)
         {
-            Count = GetMaxNumber(n);
+            _maxNumber = GetMaxNumber(n);
         }
 
         private int GetMaxNumber(int n)
@@ -49,12 +49,12 @@ namespace NumericalSequence
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return new NumericalSequenceEnumerator(Count);
+            return new NumericalSequenceEnumerator(_maxNumber);
         }
 
         public IEnumerator<int> GetEnumerator()
         {
-            return new NumericalSequenceEnumerator(Count);
+            return new NumericalSequenceEnumerator(_maxNumber);
         }
 
         public override string ToString()

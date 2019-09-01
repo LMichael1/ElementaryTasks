@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessBoard", "ChessBoard\Ch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Envelopes", "Envelopes\Envelopes.csproj", "{2CC8D16F-223A-454F-86E0-DAE38519C741}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fibonacci", "Fibonacci\Fibonacci.csproj", "{6D44C8ED-DD44-4E66-A281-D2B97D8D4336}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{2CC8D16F-223A-454F-86E0-DAE38519C741}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CC8D16F-223A-454F-86E0-DAE38519C741}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CC8D16F-223A-454F-86E0-DAE38519C741}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D44C8ED-DD44-4E66-A281-D2B97D8D4336}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D44C8ED-DD44-4E66-A281-D2B97D8D4336}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D44C8ED-DD44-4E66-A281-D2B97D8D4336}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D44C8ED-DD44-4E66-A281-D2B97D8D4336}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
