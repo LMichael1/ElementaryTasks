@@ -41,7 +41,7 @@ namespace NumericalSequence
 
             if (Math.Pow(count, 2) == n)
             {
-                count -= 1;
+                count --;
             }
 
             return count;
