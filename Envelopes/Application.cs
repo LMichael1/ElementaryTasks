@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UserInterface;
+using Validation;
 
 namespace Envelopes
 {
@@ -32,42 +33,55 @@ namespace Envelopes
 
         #region Fields
 
-        private IEnvelopeValidator _validator;
+        private readonly IEnvelopeValidator _validator;
+        private readonly string[] _args;
 
         #endregion
 
-        public Application()
+        public Application(string[] args)
         {
-            _validator = new EnvelopeValidator(ARGS_LENGTH, MIN_LENGTH, MIN_WIDTH);
+            _validator = new EnvelopeValidator(args, ARGS_LENGTH, MIN_LENGTH, MIN_WIDTH);
+            _args = args;
         }
 
-        public void Run(string[] args)
+        public void Run()
         {
-            if (_validator.IsArgsEmpty(args))
+            if (_validator.IsArgsEmpty())
             {
                 RunWithoutArgs();
             }
             else
             {
-                RunWithArgs(args);
+                RunWithArgs();
             }
         }
 
-        public void RunWithArgs(string[] args)
+        private void RunWithArgs()
         {
-            if (_validator.IsNumberOfArgsValid(args))
+            switch (_validator.ValidateArgs())
             {
-                Envelope firstEnvelope = GetEnvelope(args[0], args[1]);
-                Envelope secondEnvelope = GetEnvelope(args[2], args[3]);
-
-                if (firstEnvelope != null && secondEnvelope != null)
-                {
-                    RunWithEnvelopes(firstEnvelope, secondEnvelope);
-                }
-            }
-            else
-            {
-                UI.ShowMessage(INVALID_NUMBER_OF_ARGS);
+                case ArgsValidatorResult.InvalidNumberOfArgs:
+                    {
+                        ConsoleUI.ShowMessage(INVALID_NUMBER_OF_ARGS);
+                        break;
+                    }
+                case ArgsValidatorResult.InvalidTypeOfArgs:
+                    {
+                        ConsoleUI.ShowMessage(INVALID_FORMAT);
+                        break;
+                    }
+                case ArgsValidatorResult.InvalidValue:
+                    {
+                        ConsoleUI.ShowMessage(INVALID_ARGUMENT);
+                        break;
+                    }
+                case ArgsValidatorResult.Success:
+                    {
+                        Envelope firstEnvelope = GetEnvelope(_args[0], _args[1]);
+                        Envelope secondEnvelope = GetEnvelope(_args[2], _args[3]);
+                        RunWithEnvelopes(firstEnvelope, secondEnvelope);
+                        break;
+                    }
             }
         }
 
@@ -75,20 +89,25 @@ namespace Envelopes
         {
             do
             {
-                UI.ShowMessage(FIRST_ENVELOPE);
+                ConsoleUI.ShowMessage(FIRST_ENVELOPE);
                 Envelope firstEnvelope = GetEnvelope();
 
-                UI.ShowMessage(SECOND_ENVELOPE);
-                Envelope secondEnvelope = GetEnvelope();
-
-                if (firstEnvelope != null && secondEnvelope != null)
+                if (firstEnvelope == null)
                 {
-                    RunWithEnvelopes(firstEnvelope, secondEnvelope);
+                    break;
                 }
 
-                UI.ShowMessage(CONTINUE);
+                ConsoleUI.ShowMessage(SECOND_ENVELOPE);
+                Envelope secondEnvelope = GetEnvelope();
+
+                if (secondEnvelope == null)
+                {
+                    break;
+                }
+
+                RunWithEnvelopes(firstEnvelope, secondEnvelope);
             }
-            while (UI.WillContinue());
+            while (ConsoleUI.WillContinue(CONTINUE));
         }
 
         private void RunWithEnvelopes(Envelope first, Envelope second)
@@ -99,17 +118,17 @@ namespace Envelopes
             {
                 case CompareResult.FirstCanContainSecond:
                     {
-                        UI.ShowMessage(FIRST_CAN_CONTAIN_SECOND);
+                        ConsoleUI.ShowMessage(FIRST_CAN_CONTAIN_SECOND);
                         break;
                     }
                 case CompareResult.SecondCanContainFirst:
                     {
-                        UI.ShowMessage(SECOND_CAN_CONTAIN_FIRST);
+                        ConsoleUI.ShowMessage(SECOND_CAN_CONTAIN_FIRST);
                         break;
                     }
                 case CompareResult.NotFitted:
                     {
-                        UI.ShowMessage(CAN_NOT_CONTAIN);
+                        ConsoleUI.ShowMessage(CAN_NOT_CONTAIN);
                         break;
                     }
             }
@@ -119,52 +138,38 @@ namespace Envelopes
         {
             Envelope result = null;
 
-            UI.ShowMessage(ENTER_LENGTH);
-            string strLength = UI.GetValueFromInput();
+            string strLength = ConsoleUI.GetValueFromInput(ENTER_LENGTH);
 
-            UI.ShowMessage(ENTER_WIDTH);
-            string strWidth = UI.GetValueFromInput();
+            string strWidth = ConsoleUI.GetValueFromInput(ENTER_WIDTH);
 
-            if (!_validator.IsArgsNumbers(strLength, strWidth))
+            switch (_validator.ValidateEnvelope(strLength, strWidth))
             {
-                UI.ShowMessage(INVALID_FORMAT);
-
-                return result;
+                case ArgsValidatorResult.InvalidTypeOfArgs:
+                    {
+                        ConsoleUI.ShowMessage(INVALID_FORMAT);
+                        break;
+                    }
+                case ArgsValidatorResult.InvalidValue:
+                    {
+                        ConsoleUI.ShowMessage(INVALID_ARGUMENT);
+                        break;
+                    }
+                case ArgsValidatorResult.Success:
+                    {
+                        double envelopeLength = Convert.ToDouble(strLength);
+                        double envelopeWidth = Convert.ToDouble(strWidth);
+                        result = new Envelope(envelopeLength, envelopeWidth);
+                        break;
+                    }
             }
 
-            int length = Convert.ToInt32(strLength);
-            int width = Convert.ToInt32(strWidth);
-
-            if (!_validator.IsSizesValid(length, width))
-            {
-                UI.ShowMessage(INVALID_ARGUMENT);
-
-                return result;
-            }
-
-            return new Envelope(length, width);
+            return result;
         }
 
         private Envelope GetEnvelope(string strLength, string strWidth)
         {
-            Envelope result = null;
-
-            if (!_validator.IsArgsNumbers(strLength, strWidth))
-            {
-                UI.ShowMessage(INVALID_FORMAT);
-
-                return result;
-            }
-
             int length = Convert.ToInt32(strLength);
             int width = Convert.ToInt32(strWidth);
-
-            if (!_validator.IsSizesValid(length, width))
-            {
-                UI.ShowMessage(INVALID_ARGUMENT);
-
-                return result;
-            }
 
             return new Envelope(length, width);
         }

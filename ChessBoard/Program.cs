@@ -10,7 +10,7 @@ namespace ChessBoard
     {
         static void Main(string[] args)
         {
-            new Application().Run(args);
+            new Application(args).Run();
 
             Console.ReadKey();
         }

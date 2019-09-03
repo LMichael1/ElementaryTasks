@@ -38,7 +38,7 @@ namespace NumericalSequence
         {
             get
             {
-                if (_position == -1 || _position > _maxNumber)
+                if (_position == 0 || _position > _maxNumber)
                 {
                     throw new InvalidOperationException();
                 }

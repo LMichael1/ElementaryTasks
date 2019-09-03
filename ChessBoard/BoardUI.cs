@@ -7,7 +7,7 @@ using UserInterface;
 
 namespace ChessBoard
 {
-    class BoardUI : UI
+    class BoardUI : ConsoleUI
     {
         public static void DrawBoard(IBoard board)
         {

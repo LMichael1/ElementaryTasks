@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UserInterface;
+using Validation;
 
 namespace Fibonacci
 {
     class Application
     {
+        #region Constants
+
         private const string INVALID_NUMBER_OF_ARGS = "You must input 2 arguments. Try again.";
         private const string INVALID_FORMAT = "Arguments must be numbers. Try again.";
         private const string INVALID_SIZE = "Second argument must be greater than first. Try again.";
@@ -16,65 +19,73 @@ namespace Fibonacci
 
         private const int ARGS_LENGTH = 2;
 
-        private ISequenceValidator _validator;
+        #endregion
 
-        public Application()
+        #region Fields
+
+        private readonly ISequenceValidator _validator;
+        private readonly string[] _args; 
+
+        #endregion
+
+        public Application(string[] args)
         {
-            _validator = new SequenceValidator(ARGS_LENGTH);
+            _validator = new SequenceValidator(args, ARGS_LENGTH);
+            _args = args;
         }
 
-        public void Run(string[] args)
+        public void Run()
         {
-            if (_validator.IsArgsEmpty(args))
+            switch (_validator.ValidateArgs())
             {
-                UI.ShowMessage(HELP);
-            }
-            else
-            {
-                FibonacciSequence sequence = GetSequence(args);
-                if (sequence != null)
-                {
-                    RunWithSequence(sequence);
-                }
+                case ArgsValidatorResult.Empty:
+                    {
+                        ConsoleUI.ShowMessage(HELP);
+                        break;
+                    }
+                case ArgsValidatorResult.InvalidNumberOfArgs:
+                    {
+                        ConsoleUI.ShowMessage(INVALID_NUMBER_OF_ARGS);
+                        break;
+                    }
+                case ArgsValidatorResult.InvalidTypeOfArgs:
+                    {
+                        ConsoleUI.ShowMessage(INVALID_FORMAT);
+                        break;
+                    }
+                case ArgsValidatorResult.InvalidValue:
+                    {
+                        ConsoleUI.ShowMessage(INVALID_SIZE);
+                        break;
+                    }
+                case ArgsValidatorResult.Success:
+                    {
+                        FibonacciSequence sequence = GetSequence();
+                        RunWithSequence(sequence);
+                        break;
+                    }
             }
         }
 
         private void RunWithSequence(FibonacciSequence sequence)
         {
-            UI.ShowMessage(sequence.ToString());
+            StringBuilder sb = new StringBuilder();
+            foreach (var i in sequence)
+            {
+                sb.Append(i);
+                sb.Append(", ");
+            }
+            sb.Length -= 2;
+
+            ConsoleUI.ShowMessage(sb.ToString());
         }
 
-        public FibonacciSequence GetSequence(string[] args)
+        private FibonacciSequence GetSequence()
         {
-            FibonacciSequence sequence = null;
+            int minNumber = Convert.ToInt32(_args[0]);
+            int maxNumber = Convert.ToInt32(_args[1]);
 
-            if (!_validator.IsNumberOfArgsValid(args))
-            {
-                UI.ShowMessage(INVALID_NUMBER_OF_ARGS);
-
-                return sequence;
-            }
-
-            if (!_validator.IsArgsNumbers(args))
-            {
-                UI.ShowMessage(INVALID_FORMAT);
-
-                return sequence;
-            }
-
-            int minNumber = Convert.ToInt32(args[0]);
-            int maxNumber = Convert.ToInt32(args[1]);
-
-            if (!_validator.IsValuesValid(minNumber, maxNumber))
-            {
-                UI.ShowMessage(INVALID_SIZE);
-
-                return sequence;
-            }
-
-            sequence = new FibonacciSequence(minNumber, maxNumber);
-
-            return sequence;
+            return new FibonacciSequence(minNumber, maxNumber);
         }
     }
 }

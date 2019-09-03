@@ -7,8 +7,9 @@ using Validation;
 
 namespace ChessBoard
 {
-    interface IBoardValidator : IValidator
+    interface IBoardValidator : IArgsValidator
     {
         bool IsSizesValid(int rows, int columns);
+        ArgsValidatorResult ValidateArgs();
     }
 }

@@ -20,21 +20,6 @@ namespace Fibonacci
 
         #endregion
 
-        public int this[int index]
-        {
-            get
-            {
-                if (index < this.Count())
-                {
-                    return this.ToList()[index];
-                }
-                else
-                {
-                    throw new IndexOutOfRangeException();
-                }
-            }
-        }
-
         public FibonacciSequence(int minNumber, int maxNumber)
         {
             _minNumber = minNumber;
@@ -64,11 +49,6 @@ namespace Fibonacci
         IEnumerator IEnumerable.GetEnumerator()
         {
             return new FibonacciEnumerator(_maxNumber, _x, _y, _z);
-        }
-
-        public override string ToString()
-        {
-            return string.Join(", ", this.ToList());
         }
     }
 }

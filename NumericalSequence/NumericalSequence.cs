@@ -56,10 +56,5 @@ namespace NumericalSequence
         {
             return new NumericalSequenceEnumerator(_maxNumber);
         }
-
-        public override string ToString()
-        {
-            return string.Join(", ", this.ToList());
-        }
     }
 }

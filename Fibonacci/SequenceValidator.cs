@@ -7,9 +7,9 @@ using Validation;
 
 namespace Fibonacci
 {
-    class SequenceValidator : Validator, ISequenceValidator
+    class SequenceValidator : ArgsValidator, ISequenceValidator
     {
-        public SequenceValidator(int argsLength) : base(argsLength)
+        public SequenceValidator(string[] args, int argsLength) : base(args, argsLength)
         {
 
         }
@@ -17,6 +17,34 @@ namespace Fibonacci
         public bool IsValuesValid(int min, int max)
         {
             return max > min;
+        }
+
+        public ArgsValidatorResult ValidateArgs()
+        {
+            if (IsArgsEmpty())
+            {
+                return ArgsValidatorResult.Empty;
+            }
+
+            if (!IsNumberOfArgsValid())
+            {
+                return ArgsValidatorResult.InvalidNumberOfArgs;
+            }
+
+            if (!IsArgsIntegers())
+            {
+                return ArgsValidatorResult.InvalidTypeOfArgs;
+            }
+
+            int min = Convert.ToInt32(_args[0]);
+            int max = Convert.ToInt32(_args[1]);
+
+            if (!IsValuesValid(min, max))
+            {
+                return ArgsValidatorResult.InvalidValue;
+            }
+
+            return ArgsValidatorResult.Success;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Validation;
 
 namespace ChessBoard
 {
@@ -23,62 +24,56 @@ namespace ChessBoard
 
         #region Fields
 
-        private IBoardValidator _validator;
+        private readonly IBoardValidator _validator;
+        private readonly string[] _args;
         
         #endregion
 
-        public Application()
+        public Application(string[] args)
         {
-            _validator = new BoardValidator(ARGS_LENGTH, MIN_NUMBER_OF_ROWS, MIN_NUMBER_OF_COLUMNS);
+            _validator = new BoardValidator(args, ARGS_LENGTH, MIN_NUMBER_OF_ROWS, MIN_NUMBER_OF_COLUMNS);
+            _args = args;
         }
 
-        public void Run(string[] args)
+        public void Run()
         {
-            if (args.Length == 0)
+            switch (_validator.ValidateArgs())
             {
-                BoardUI.ShowMessage(HELP);
-            }
-            else
-            {
-                Board checkersBoard = GetBoard(args);
-                if (checkersBoard != null)
-                {
-                    RunWithBoard(checkersBoard);
-                }
+                case ArgsValidatorResult.Empty:
+                    {
+                        BoardUI.ShowMessage(HELP);
+                        break;
+                    }
+                case ArgsValidatorResult.InvalidNumberOfArgs:
+                    {
+                        BoardUI.ShowMessage(INVALID_NUMBER_OF_ARGS);
+                        break;
+                    }
+                case ArgsValidatorResult.InvalidTypeOfArgs:
+                    {
+                        BoardUI.ShowMessage(INVALID_TYPE_OF_ARGS);
+                        break;
+                    }
+                case ArgsValidatorResult.InvalidValue:
+                    {
+                        BoardUI.ShowMessage(INVALID_SIZE);
+                        break;
+                    }
+                case ArgsValidatorResult.Success:
+                    {
+                        Board checkersBoard = GetBoard();
+                        RunWithBoard(checkersBoard);
+                        break;
+                    }
             }
         }
 
-        private Board GetBoard(string[] args)
+        private Board GetBoard()
         {
-            Board result = null;
+            int rows = Convert.ToInt32(_args[0]);
+            int columns = Convert.ToInt32(_args[1]);
 
-            if (!_validator.IsNumberOfArgsValid(args))
-            {
-                BoardUI.ShowMessage(INVALID_NUMBER_OF_ARGS);
-
-                return result;
-            }
-
-            if (!_validator.IsArgsNumbers(args))
-            {
-                BoardUI.ShowMessage(INVALID_TYPE_OF_ARGS);
-
-                return result;
-            }
-
-            int rows = Convert.ToInt32(args[0]);
-            int columns = Convert.ToInt32(args[1]);
-
-            if (!_validator.IsSizesValid(rows, columns))
-            {
-                BoardUI.ShowMessage(INVALID_SIZE);
-
-                return result;
-            }
-
-            result = new Board(rows, columns);
-
-            return result;
+            return new Board(rows, columns);
         }
 
         private void RunWithBoard(Board checkersBoard)

@@ -7,7 +7,7 @@ using Validation;
 
 namespace ChessBoard
 {
-    class BoardValidator : Validator, IBoardValidator
+    class BoardValidator : ArgsValidator, IBoardValidator
     {
         #region Fields
 
@@ -16,7 +16,7 @@ namespace ChessBoard
 
         #endregion
 
-        public BoardValidator (int argsLength, int minNumberOfRows, int minNumberOfColumns) : base (argsLength)
+        public BoardValidator (string[] args, int argsLength, int minNumberOfRows, int minNumberOfColumns) : base (args, argsLength)
         {
             _minNumberOfRows = minNumberOfRows;
             _minNumberOfColumns = minNumberOfColumns;
@@ -27,5 +27,32 @@ namespace ChessBoard
             return (rows >= _minNumberOfRows) && (columns >= _minNumberOfColumns);
         }
 
+        public ArgsValidatorResult ValidateArgs()
+        {
+            if (IsArgsEmpty())
+            {
+                return ArgsValidatorResult.Empty;
+            }
+
+            if (!IsNumberOfArgsValid())
+            {
+                return ArgsValidatorResult.InvalidNumberOfArgs;
+            }
+
+            if (!IsArgsIntegers())
+            {
+                return ArgsValidatorResult.InvalidTypeOfArgs;
+            }
+
+            int rows = Convert.ToInt32(_args[0]);
+            int columns = Convert.ToInt32(_args[1]);
+
+            if (!IsSizesValid(rows, columns))
+            {
+                return ArgsValidatorResult.InvalidValue;
+            }
+
+            return ArgsValidatorResult.Success;
+        }
     }
 }

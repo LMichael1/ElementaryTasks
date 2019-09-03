@@ -2,22 +2,25 @@
 
 namespace UserInterface
 {
-    public class UI
+    public class ConsoleUI
     {
         public static void ShowMessage(string message)
         {
             Console.WriteLine(message);
         }
 
-        public static string GetValueFromInput()
+        public static string GetValueFromInput(string messageToShow)
         {
+            Console.WriteLine(messageToShow);
+
             return Console.ReadLine();
         }
 
-        public static bool WillContinue()
+        public static bool WillContinue(string messageToShow)
         {
-            string answer;
+            Console.WriteLine(messageToShow);
 
+            string answer;
             do
             {
                 answer = Console.ReadLine().ToUpper();

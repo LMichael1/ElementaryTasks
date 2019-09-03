@@ -7,7 +7,7 @@ using Validation;
 
 namespace NumericalSequence
 {
-    class SequenceValidator : Validator, ISequenceValidator
+    class SequenceValidator : ArgsValidator, ISequenceValidator
     {
         #region Private fields
 
@@ -15,7 +15,7 @@ namespace NumericalSequence
 
         #endregion
 
-        public SequenceValidator(int argsLength, int minValue) : base (argsLength)
+        public SequenceValidator(string[] args, int argsLength, int minValue) : base (args, argsLength)
         {
             _minValue = minValue;
         }
@@ -23,6 +23,33 @@ namespace NumericalSequence
         public bool IsValueValid(int value)
         {
             return value >= _minValue;
+        }
+        
+        public ArgsValidatorResult ValidateArgs()
+        {
+            if (IsArgsEmpty())
+            {
+                return ArgsValidatorResult.Empty;
+            }
+
+            if (!IsNumberOfArgsValid())
+            {
+                return ArgsValidatorResult.InvalidNumberOfArgs;
+            }
+
+            if (!IsArgsIntegers())
+            {
+                return ArgsValidatorResult.InvalidTypeOfArgs;
+            }
+
+            int value = Convert.ToInt32(_args[0]);
+
+            if (!IsValueValid(value))
+            {
+                return ArgsValidatorResult.InvalidValue;
+            }
+
+            return ArgsValidatorResult.Success;
         }
     }
 }

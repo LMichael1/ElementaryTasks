@@ -7,8 +7,9 @@ using Validation;
 
 namespace Fibonacci
 {
-    interface ISequenceValidator : IValidator
+    interface ISequenceValidator : IArgsValidator
     {
         bool IsValuesValid(int min, int max);
+        ArgsValidatorResult ValidateArgs();
     }
 }

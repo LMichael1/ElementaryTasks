@@ -7,8 +7,9 @@ using Validation;
 
 namespace NumericalSequence
 {
-    interface ISequenceValidator : IValidator
+    interface ISequenceValidator : IArgsValidator
     {
         bool IsValueValid(int value);
+        ArgsValidatorResult ValidateArgs();
     }
 }

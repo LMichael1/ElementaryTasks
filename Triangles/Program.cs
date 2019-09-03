@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NumericalSequence
+namespace Triangles
 {
     class Program
     {
         static void Main(string[] args)
         {
-            new Application(args).Run();
-
-            Console.ReadKey();
         }
     }
 }

@@ -10,73 +10,82 @@ namespace NumericalSequence
 {
     class Application
     {
+        #region Constants
+
         private const string INVALID_NUMBER_OF_ARGS = "You must input 1 argument.";
         private const string INVALID_FORMAT = "Argument must be a natural number. Try again.";
-        private const string HELP = "Enter the number to get a sequence of natural numbers whose square is less than a given number.";
+        private const string HELP = "Enter the number to get a sequence of natural numbers whose square is less than a given number."; 
 
         private const int ARGS_LENGTH = 1;
         private const int MIN_VALUE = 2;
 
-        private ISequenceValidator _validator;
+        #endregion
 
-        public Application()
+        #region Fields
+
+        private readonly ISequenceValidator _validator;
+        private readonly string[] _args; 
+
+        #endregion
+
+        public Application(string[] args)
         {
-            _validator = new SequenceValidator(ARGS_LENGTH, MIN_VALUE);
+            _validator = new SequenceValidator(args, ARGS_LENGTH, MIN_VALUE);
+            _args = args;
         }
 
-        public void Run(string[] args)
+        public void Run()
         {
-            if (_validator.IsArgsEmpty(args))
+            switch(_validator.ValidateArgs())
             {
-                UI.ShowMessage(HELP);
-            }
-            else
-            {
-                NumericalSequence sequence = GetSequence(args);
-                if (sequence != null)
-                {
-                    RunWithSequence(sequence);
-                }
+                case ArgsValidatorResult.Empty:
+                    {
+                        ConsoleUI.ShowMessage(HELP);
+                        break;
+                    }
+                case ArgsValidatorResult.InvalidNumberOfArgs:
+                    {
+                        ConsoleUI.ShowMessage(INVALID_NUMBER_OF_ARGS);
+                        break;
+                    }
+                case ArgsValidatorResult.InvalidTypeOfArgs:
+                    {
+                        ConsoleUI.ShowMessage(INVALID_FORMAT);
+                        break;
+                    }
+                case ArgsValidatorResult.InvalidValue:
+                    {
+                        ConsoleUI.ShowMessage(INVALID_FORMAT);
+                        break;
+                    }
+                case ArgsValidatorResult.Success:
+                    {
+                        NumericalSequence sequence = GetSequence();
+                        RunWithSequence(sequence);
+                        break;
+                    }
             }
         }
 
         private void RunWithSequence(NumericalSequence sequence)
         {
-            UI.ShowMessage(sequence.ToString());
+            StringBuilder sb = new StringBuilder();
+            foreach (var i in sequence)
+            {
+                sb.Append(i);
+                sb.Append(", ");
+            }
+            sb.Length -= 2;
+
+            ConsoleUI.ShowMessage(sb.ToString());
         }
 
-        public NumericalSequence GetSequence(string[] args)
+        private NumericalSequence GetSequence()
         {
-            NumericalSequence sequence = null;
+            int number = Convert.ToInt32(_args[0]);
 
-            if (!_validator.IsNumberOfArgsValid(args))
-            {
-                UI.ShowMessage(INVALID_NUMBER_OF_ARGS);
-
-                return sequence;
-            }
-
-            if (!_validator.IsArgsNumbers(args))
-            {
-                UI.ShowMessage(INVALID_FORMAT);
-
-                return sequence;
-            }
-
-            int number = Convert.ToInt32(args[0]);
-
-            if (!_validator.IsValueValid(number))
-            {
-                UI.ShowMessage(INVALID_FORMAT);
-
-                return sequence;
-            }
-
-            sequence = new NumericalSequence(number);
-
-            return sequence;
+            return new NumericalSequence(number);
         }
-
 
     }
 }
