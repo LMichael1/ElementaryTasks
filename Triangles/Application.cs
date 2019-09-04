@@ -30,7 +30,7 @@ namespace Triangles
 
         public Application(string[] args)
         {
-            _validator = new TriangleValidator(args, ARGS_LENGTH, MIN_SIDE);
+            _validator = new TriangleArgsValidator(args, ARGS_LENGTH, MIN_SIDE);
             _triangles = new List<Triangle>();
         }
 
@@ -118,10 +118,7 @@ namespace Triangles
 
             ConsoleUI.ShowMessage(LIST);
 
-            foreach (var i in _triangles)
-            {
-                ConsoleUI.ShowMessage(i.ToString());
-            }
+            ConsoleUI.Display(_triangles);
         }
     }
 }

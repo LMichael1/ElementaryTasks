@@ -9,7 +9,7 @@ namespace Triangles
 {
     interface ITriangleValidator : IArgsValidator
     {
-        bool IsSizesValid(double firstSide, double secondSide, double thirdSide);
+        bool IsSizesValid(params double[] sizes);
         ArgsValidatorResult ValidateArgs();
     }
 }

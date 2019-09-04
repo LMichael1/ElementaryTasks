@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace UserInterface
 {
@@ -34,6 +36,14 @@ namespace UserInterface
         {
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.BackgroundColor = ConsoleColor.Black;
+        }
+
+        public static void Display(IEnumerable items)
+        {
+            foreach (var i in items)
+            {
+                Console.WriteLine(i);
+            }
         }
     }
 }
