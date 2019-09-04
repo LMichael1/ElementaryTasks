@@ -44,8 +44,8 @@ namespace ChessBoard
                 return ArgsValidatorResult.InvalidTypeOfArgs;
             }
 
-            int rows = Convert.ToInt32(_args[0]);
-            int columns = Convert.ToInt32(_args[1]);
+            int rows = Convert.ToInt32(Args[0]);
+            int columns = Convert.ToInt32(Args[1]);
 
             if (!IsSizesValid(rows, columns))
             {

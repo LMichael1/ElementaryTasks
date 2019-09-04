@@ -6,6 +6,7 @@ namespace Validation
 {
     public interface IArgsValidator
     {
+        string[] Args { get; set; }
         bool IsInteger(int argIndex);
         bool IsDouble(int argIndex);
         bool IsNumberOfArgsValid();

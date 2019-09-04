@@ -7,50 +7,71 @@ namespace Validation
         #region Private fields
 
         private readonly int _argsLength;
-        protected readonly string[] _args;
 
         #endregion
 
+        public string[] Args { get; set; }
+
         public ArgsValidator(string[] args, int argsLength)
         {
-            _args = args;
+            Args = args;
             _argsLength = argsLength;
         }
 
         public bool IsInteger(int argIndex)
         {
-            return int.TryParse(_args[argIndex], out _);
+            return int.TryParse(Args[argIndex], out _);
         }
 
-        public bool IsInteger(string value)
+        public bool IsIntegers(params string[] values)
         {
-            return int.TryParse(value, out _);
+            bool result = false;
+
+            foreach (var value in values)
+            {
+                if (int.TryParse(value, out _))
+                {
+                    result = true;
+                }
+            }
+
+            return result;
         }
 
         public bool IsDouble(int argIndex)
         {
-            return double.TryParse(_args[argIndex], out _);
+            return double.TryParse(Args[argIndex], out _);
         }
 
-        public bool IsDouble(string value)
+        public bool IsDoubles(params string[] values)
         {
-            return double.TryParse(value, out _);
+            bool result = false;
+
+            foreach (var value in values)
+            {
+                if (double.TryParse(value, out _))
+                {
+                    result = true;
+                }
+            }
+
+            return result;
         }
 
         public bool IsNumberOfArgsValid()
         {
-            return _args.Length == _argsLength;
+            return Args.Length == _argsLength;
         }
 
         public bool IsArgsEmpty()
         {
-            return _args.Length == 0;
+            return Args.Length == 0;
         }
 
         public bool IsArgsIntegers()
         {
             bool result = true;
-            for (int i = 0; i < _args.Length; i++)
+            for (int i = 0; i < Args.Length; i++)
             {
                 if (!IsInteger(i))
                 {
@@ -64,7 +85,7 @@ namespace Validation
         public bool IsArgsDoubles()
         {
             bool result = true;
-            for (int i = 0; i < _args.Length; i++)
+            for (int i = 0; i < Args.Length; i++)
             {
                 if (!IsDouble(i))
                 {

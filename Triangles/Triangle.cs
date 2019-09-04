@@ -38,5 +38,12 @@ namespace Triangles
         {
             return Area.CompareTo(other.Area);
         }
+
+        public override string ToString()
+        {
+            string result = string.Format("[Triangle {0}]: {1} cm", Name, Area);
+
+            return result;
+        }
     }
 }

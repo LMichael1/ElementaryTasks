@@ -42,7 +42,7 @@ namespace NumericalSequence
                 return ArgsValidatorResult.InvalidTypeOfArgs;
             }
 
-            int value = Convert.ToInt32(_args[0]);
+            int value = Convert.ToInt32(Args[0]);
 
             if (!IsValueValid(value))
             {

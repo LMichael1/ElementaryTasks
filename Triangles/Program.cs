@@ -10,6 +10,9 @@ namespace Triangles
     {
         static void Main(string[] args)
         {
+            new Application(args).Run();
+
+            Console.ReadKey();
         }
     }
 }

@@ -44,8 +44,8 @@ namespace Envelopes
                 return ArgsValidatorResult.InvalidTypeOfArgs;
             }
 
-            double length = Convert.ToDouble(_args[0]);
-            double width = Convert.ToDouble(_args[1]);
+            double length = Convert.ToDouble(Args[0]);
+            double width = Convert.ToDouble(Args[1]);
 
             if (!IsSizesValid(length, width))
             {
@@ -57,7 +57,7 @@ namespace Envelopes
 
         public ArgsValidatorResult ValidateEnvelope(string length, string width)
         {
-            if (!IsDouble(length) || !IsDouble(width))
+            if (!IsDoubles(length) || !IsDoubles(width))
             {
                 return ArgsValidatorResult.InvalidTypeOfArgs;
             }

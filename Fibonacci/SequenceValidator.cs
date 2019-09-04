@@ -36,8 +36,8 @@ namespace Fibonacci
                 return ArgsValidatorResult.InvalidTypeOfArgs;
             }
 
-            int min = Convert.ToInt32(_args[0]);
-            int max = Convert.ToInt32(_args[1]);
+            int min = Convert.ToInt32(Args[0]);
+            int max = Convert.ToInt32(Args[1]);
 
             if (!IsValuesValid(min, max))
             {
