@@ -44,9 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
-    <Compile Include="BoardValidator.cs" />
+    <Compile Include="BoardArgsValidator.cs" />
     <Compile Include="Board.cs" />
-    <Compile Include="IBoardValidator.cs" />
+    <Compile Include="IBoardArgsValidator.cs" />
     <Compile Include="BoardUI.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="CellColor.cs" />

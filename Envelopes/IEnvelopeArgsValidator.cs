@@ -7,7 +7,7 @@ using Validation;
 
 namespace Envelopes
 {
-    interface IEnvelopeValidator : IArgsValidator
+    interface IEnvelopeArgsValidator : IArgsValidator
     {
         bool IsSizesValid(double length, double width);
         ArgsValidatorResult ValidateArgs();

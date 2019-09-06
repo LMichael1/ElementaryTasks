@@ -7,7 +7,7 @@ using Validation;
 
 namespace Envelopes
 {
-    class EnvelopeValidator : ArgsValidator, IEnvelopeValidator
+    class EnvelopeArgsValidator : ArgsValidator, IEnvelopeArgsValidator
     {
         #region Fields
 
@@ -16,7 +16,7 @@ namespace Envelopes
 
         #endregion
 
-        public EnvelopeValidator(string[] args, int argsLength, double minLength, double minWidth) : base(args, argsLength)
+        public EnvelopeArgsValidator(string[] args, int argsLength, double minLength, double minWidth) : base(args, argsLength)
         {
             _minLength = minLength;
             _minWidth = minWidth;

@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Validation;
 
-namespace Fibonacci
+namespace ChessBoard
 {
-    interface ISequenceValidator : IArgsValidator
+    interface IBoardArgsValidator : IArgsValidator
     {
-        bool IsValuesValid(int min, int max);
+        bool IsSizesValid(int rows, int columns);
         ArgsValidatorResult ValidateArgs();
     }
 }

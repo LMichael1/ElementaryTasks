@@ -33,14 +33,14 @@ namespace Envelopes
 
         #region Fields
 
-        private readonly IEnvelopeValidator _validator;
+        private readonly IEnvelopeArgsValidator _validator;
         private readonly string[] _args;
 
         #endregion
 
         public Application(string[] args)
         {
-            _validator = new EnvelopeValidator(args, ARGS_LENGTH, MIN_LENGTH, MIN_WIDTH);
+            _validator = new EnvelopeArgsValidator(args, ARGS_LENGTH, MIN_LENGTH, MIN_WIDTH);
             _args = args;
         }
 

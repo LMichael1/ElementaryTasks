@@ -24,14 +24,14 @@ namespace ChessBoard
 
         #region Fields
 
-        private readonly IBoardValidator _validator;
+        private readonly IBoardArgsValidator _validator;
         private readonly string[] _args;
         
         #endregion
 
         public Application(string[] args)
         {
-            _validator = new BoardValidator(args, ARGS_LENGTH, MIN_NUMBER_OF_ROWS, MIN_NUMBER_OF_COLUMNS);
+            _validator = new BoardArgsValidator(args, ARGS_LENGTH, MIN_NUMBER_OF_ROWS, MIN_NUMBER_OF_COLUMNS);
             _args = args;
         }
 

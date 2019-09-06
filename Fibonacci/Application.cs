@@ -23,14 +23,14 @@ namespace Fibonacci
 
         #region Fields
 
-        private readonly ISequenceValidator _validator;
+        private readonly ISequenceArgsVaildator _validator;
         private readonly string[] _args; 
 
         #endregion
 
         public Application(string[] args)
         {
-            _validator = new SequenceValidator(args, ARGS_LENGTH);
+            _validator = new SequenceArgsValidator(args, ARGS_LENGTH);
             _args = args;
         }
 

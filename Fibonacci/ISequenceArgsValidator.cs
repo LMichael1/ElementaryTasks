@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Validation;
 
-namespace NumericalSequence
+namespace Fibonacci
 {
-    interface ISequenceValidator : IArgsValidator
+    interface ISequenceArgsVaildator : IArgsValidator
     {
-        bool IsValueValid(int value);
+        bool IsValuesValid(int min, int max);
         ArgsValidatorResult ValidateArgs();
     }
 }

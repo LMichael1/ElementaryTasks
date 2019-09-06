@@ -7,7 +7,7 @@ using Validation;
 
 namespace Triangles
 {
-    interface ITriangleValidator : IArgsValidator
+    interface ITriangleArgsValidator : IArgsValidator
     {
         bool IsSizesValid(params double[] sizes);
         ArgsValidatorResult ValidateArgs();

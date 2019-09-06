@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Validation;
 
-namespace ChessBoard
+namespace NumericalSequence
 {
-    interface IBoardValidator : IArgsValidator
+    interface ISequenceArgsValidator : IArgsValidator
     {
-        bool IsSizesValid(int rows, int columns);
+        bool IsValueValid(int value);
         ArgsValidatorResult ValidateArgs();
     }
 }

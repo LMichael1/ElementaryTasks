@@ -7,7 +7,7 @@ using Validation;
 
 namespace Triangles
 {
-    class TriangleArgsValidator : ArgsValidator, ITriangleValidator
+    class TriangleArgsValidator : ArgsValidator, ITriangleArgsValidator
     {
         #region Properties
 

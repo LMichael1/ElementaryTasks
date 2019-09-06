@@ -18,6 +18,7 @@ namespace Triangles
             {
                 return 1;
             }
+
             return 0;
         }
     }

@@ -5,20 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using Validation;
 
-namespace Fibonacci
+namespace NumericalSequence
 {
-    class SequenceValidator : ArgsValidator, ISequenceValidator
+    class SequenceArgsValidator : ArgsValidator, ISequenceArgsValidator
     {
-        public SequenceValidator(string[] args, int argsLength) : base(args, argsLength)
-        {
+        #region Private fields
 
+        private readonly int _minValue; 
+
+        #endregion
+
+        public SequenceArgsValidator(string[] args, int argsLength, int minValue) : base (args, argsLength)
+        {
+            _minValue = minValue;
         }
 
-        public bool IsValuesValid(int min, int max)
+        public bool IsValueValid(int value)
         {
-            return max > min;
+            return value >= _minValue;
         }
-
+        
         public ArgsValidatorResult ValidateArgs()
         {
             if (IsArgsEmpty())
@@ -36,10 +42,9 @@ namespace Fibonacci
                 return ArgsValidatorResult.InvalidTypeOfArgs;
             }
 
-            int min = Convert.ToInt32(Args[0]);
-            int max = Convert.ToInt32(Args[1]);
+            int value = Convert.ToInt32(Args[0]);
 
-            if (!IsValuesValid(min, max))
+            if (!IsValueValid(value))
             {
                 return ArgsValidatorResult.InvalidValue;
             }

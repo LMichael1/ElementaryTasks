@@ -23,14 +23,14 @@ namespace NumericalSequence
 
         #region Fields
 
-        private readonly ISequenceValidator _validator;
+        private readonly ISequenceArgsValidator _validator;
         private readonly string[] _args; 
 
         #endregion
 
         public Application(string[] args)
         {
-            _validator = new SequenceValidator(args, ARGS_LENGTH, MIN_VALUE);
+            _validator = new SequenceArgsValidator(args, ARGS_LENGTH, MIN_VALUE);
             _args = args;
         }
 

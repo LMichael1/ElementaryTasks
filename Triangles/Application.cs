@@ -25,7 +25,7 @@ namespace Triangles
 
         #endregion
 
-        private ITriangleValidator _validator;
+        private ITriangleArgsValidator _validator;
         private List<Triangle> _triangles;
 
         public Application(string[] args)
