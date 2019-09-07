@@ -58,7 +58,7 @@ namespace Validation
             return result;
         }
 
-        public bool IsNumberOfArgsValid()
+        public virtual bool IsNumberOfArgsValid()
         {
             return Args.Length == _argsLength;
         }

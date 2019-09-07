@@ -32,7 +32,7 @@ namespace Fibonacci
         {
             return new FibonacciEnumerator(_maxNumber, _x, _y, _z);
         }
-
+        //TODO: В ЕНУМЕРАТОР
         private void FindFirstFibonacci()
         {
             _x = 0;

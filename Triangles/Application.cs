@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UserInterface;
 using Validation;
 
-namespace Triangles
+namespace TriangleSort
 {
     class Application
     {
@@ -85,30 +85,22 @@ namespace Triangles
             switch (_validator.ValidateArgs())
             {
                 case ArgsValidatorResult.InvalidNumberOfArgs:
-                    {
-                        ConsoleUI.ShowMessage(INVALID_NUMBER_OF_ARGS);
-                        break;
-                    }
+                    ConsoleUI.ShowMessage(INVALID_NUMBER_OF_ARGS);
+                    break;
                 case ArgsValidatorResult.InvalidTypeOfArgs:
-                    {
-                        ConsoleUI.ShowMessage(INVALID_FORMAT);
-                        break;
-                    }
+                    ConsoleUI.ShowMessage(INVALID_FORMAT);
+                    break;
                 case ArgsValidatorResult.InvalidValue:
-                    {
-                        ConsoleUI.ShowMessage(INVALID_ARGUMENT);
-                        break;
-                    }
+                    ConsoleUI.ShowMessage(INVALID_ARGUMENT);
+                    break;
                 case ArgsValidatorResult.Success:
-                    {
-                        double firstSide = Convert.ToDouble(_validator.Args[1]);
-                        double secondSide = Convert.ToDouble(_validator.Args[2]);
-                        double thirdSide = Convert.ToDouble(_validator.Args[3]);
+                    double firstSide = Convert.ToDouble(_validator.Args[1]);
+                    double secondSide = Convert.ToDouble(_validator.Args[2]);
+                    double thirdSide = Convert.ToDouble(_validator.Args[3]);
 
-                        Triangle item = new Triangle(_validator.Args[0], firstSide, secondSide, thirdSide);
-                        _triangles.Add(item);
-                        break;
-                    }
+                    Triangle item = new Triangle(_validator.Args[0], firstSide, secondSide, thirdSide);
+                    _triangles.Add(item);
+                    break;
             }
         }
 

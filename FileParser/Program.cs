@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TriangleSort
+namespace FileParser
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            new Application(args).Run();
-
+            FileParser parser = new FileParser(@"D:\test.txt");
+            Console.WriteLine(parser.GetNumberOfSubstringEntries("abab"));
             Console.ReadKey();
         }
     }

@@ -15,21 +15,6 @@ namespace NumericalSequence
 
         #endregion
 
-        public int this[int index]
-        {
-            get
-            {
-                if (index < _maxNumber)
-                {
-                    return index + 1;
-                }
-                else
-                {
-                    throw new IndexOutOfRangeException();
-                }
-            }
-        }
-
         public NumericalSequence(int n)
         {
             _maxNumber = GetMaxNumber(n);
@@ -41,7 +26,7 @@ namespace NumericalSequence
 
             if (Math.Pow(count, 2) == n)
             {
-                count --;
+                count--;
             }
 
             return count;

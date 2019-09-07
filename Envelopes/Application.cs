@@ -61,27 +61,20 @@ namespace Envelopes
             switch (_validator.ValidateArgs())
             {
                 case ArgsValidatorResult.InvalidNumberOfArgs:
-                    {
-                        ConsoleUI.ShowMessage(INVALID_NUMBER_OF_ARGS);
-                        break;
-                    }
+                    ConsoleUI.ShowMessage(INVALID_NUMBER_OF_ARGS);
+                    break;
+
                 case ArgsValidatorResult.InvalidTypeOfArgs:
-                    {
-                        ConsoleUI.ShowMessage(INVALID_FORMAT);
-                        break;
-                    }
+                    ConsoleUI.ShowMessage(INVALID_FORMAT);
+                    break;
                 case ArgsValidatorResult.InvalidValue:
-                    {
-                        ConsoleUI.ShowMessage(INVALID_ARGUMENT);
-                        break;
-                    }
+                    ConsoleUI.ShowMessage(INVALID_ARGUMENT);
+                    break;
                 case ArgsValidatorResult.Success:
-                    {
-                        Envelope firstEnvelope = GetEnvelope(_args[0], _args[1]);
-                        Envelope secondEnvelope = GetEnvelope(_args[2], _args[3]);
-                        RunWithEnvelopes(firstEnvelope, secondEnvelope);
-                        break;
-                    }
+                    Envelope firstEnvelope = GetEnvelope(_args[0], _args[1]);
+                    Envelope secondEnvelope = GetEnvelope(_args[2], _args[3]);
+                    RunWithEnvelopes(firstEnvelope, secondEnvelope);
+                    break;
             }
         }
 

@@ -62,6 +62,7 @@ namespace NumericalSequence
 
                 return true;
             }
+
             return false;
         }
 
@@ -72,7 +73,7 @@ namespace NumericalSequence
 
         public void Dispose()
         {
-
+            //No resources to dispose
         }
     }
 }

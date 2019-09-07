@@ -24,13 +24,13 @@ namespace Fibonacci
         #region Fields
 
         private readonly ISequenceArgsVaildator _validator;
-        private readonly string[] _args; 
+        private readonly string[] _args;
 
         #endregion
 
         public Application(string[] args)
         {
-            _validator = new SequenceArgsValidator(args, ARGS_LENGTH);
+            _validator = new FibonacciArgsValidator(args, ARGS_LENGTH);
             _args = args;
         }
 
@@ -39,45 +39,40 @@ namespace Fibonacci
             switch (_validator.ValidateArgs())
             {
                 case ArgsValidatorResult.Empty:
-                    {
-                        ConsoleUI.ShowMessage(HELP);
-                        break;
-                    }
+                    ConsoleUI.ShowMessage(HELP);
+                    break;
+
                 case ArgsValidatorResult.InvalidNumberOfArgs:
-                    {
-                        ConsoleUI.ShowMessage(INVALID_NUMBER_OF_ARGS);
-                        break;
-                    }
+                    ConsoleUI.ShowMessage(INVALID_NUMBER_OF_ARGS);
+                    break;
+
                 case ArgsValidatorResult.InvalidTypeOfArgs:
-                    {
-                        ConsoleUI.ShowMessage(INVALID_FORMAT);
-                        break;
-                    }
+                    ConsoleUI.ShowMessage(INVALID_FORMAT);
+                    break;
+
                 case ArgsValidatorResult.InvalidValue:
-                    {
-                        ConsoleUI.ShowMessage(INVALID_SIZE);
-                        break;
-                    }
+                    ConsoleUI.ShowMessage(INVALID_SIZE);
+                    break;
+
                 case ArgsValidatorResult.Success:
-                    {
-                        FibonacciSequence sequence = GetSequence();
-                        RunWithSequence(sequence);
-                        break;
-                    }
+                    FibonacciSequence sequence = GetSequence();
+                    RunWithSequence(sequence);
+                    break;
+
             }
         }
 
         private void RunWithSequence(FibonacciSequence sequence)
         {
-            StringBuilder sb = new StringBuilder();
+            var stringBuilder = new StringBuilder();
+
             foreach (var i in sequence)
             {
-                sb.Append(i);
-                sb.Append(", ");
+                stringBuilder.AppendFormat("{0}, ", i);
             }
-            sb.Length -= 2;
+            stringBuilder.Length -= 2;
 
-            ConsoleUI.ShowMessage(sb.ToString());
+            ConsoleUI.ShowMessage(stringBuilder.ToString());
         }
 
         private FibonacciSequence GetSequence()

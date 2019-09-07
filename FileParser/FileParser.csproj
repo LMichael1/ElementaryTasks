@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6D44C8ED-DD44-4E66-A281-D2B97D8D4336}</ProjectGuid>
+    <ProjectGuid>{51323C45-2FC1-4497-A8B2-B3A55952ACBE}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Fibonacci</RootNamespace>
-    <AssemblyName>Fibonacci</AssemblyName>
+    <RootNamespace>FileParser</RootNamespace>
+    <AssemblyName>FileParser</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,26 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application.cs" />
-    <Compile Include="FibonacciEnumerator.cs" />
-    <Compile Include="FibonacciSequence.cs" />
-    <Compile Include="IFibonacciArgsValidator.cs" />
+    <Compile Include="FileParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FibonacciArgsValidator.cs" />
+    <Compile Include="StringParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\UserInterface\UserInterface.csproj">
-      <Project>{598BBE00-D11C-4B53-849C-8F4A667396CE}</Project>
-      <Name>UserInterface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Validation\Validation.csproj">
-      <Project>{EB67766B-4732-4C7F-8A36-2F215C7AAFCA}</Project>
-      <Name>Validation</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

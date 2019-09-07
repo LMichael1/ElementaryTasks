@@ -56,14 +56,7 @@ namespace Fibonacci
         {
             get
             {
-                try
-                {
-                    return Current;
-                }
-                catch (InvalidOperationException)
-                {
-                    throw;
-                }
+                return Current;
             }
         }
 
@@ -82,6 +75,7 @@ namespace Fibonacci
 
                 return true;
             }
+
             return false;
         }
 

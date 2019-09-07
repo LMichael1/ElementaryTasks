@@ -6,31 +6,30 @@ using System.Threading.Tasks;
 using UserInterface;
 using Validation;
 
-namespace NumericalSequence
+namespace NumericIntoWords
 {
     class Application
     {
         #region Constants
 
         private const string INVALID_NUMBER_OF_ARGS = "You must input 1 argument.";
-        private const string INVALID_FORMAT = "Argument must be a natural number. Try again.";
-        private const string HELP = "Enter the number to get a sequence of natural numbers whose square is less than a given number.";
+        private const string INVALID_FORMAT = "Argument must be an integer. Try again.";
+        private const string HELP = "Enter the number to convert it into words.";
 
         private const int ARGS_LENGTH = 1;
-        private const int MIN_VALUE = 2;
 
         #endregion
 
         #region Fields
 
-        private readonly ISequenceArgsValidator _validator;
+        private readonly INumericArgsValidator _validator;
         private readonly string[] _args;
 
         #endregion
 
         public Application(string[] args)
         {
-            _validator = new SequenceArgsValidator(args, ARGS_LENGTH, MIN_VALUE);
+            _validator = new NumericArgsValidator(args, ARGS_LENGTH);
             _args = args;
         }
 
@@ -47,35 +46,18 @@ namespace NumericalSequence
                 case ArgsValidatorResult.InvalidTypeOfArgs:
                     ConsoleUI.ShowMessage(INVALID_FORMAT);
                     break;
-                case ArgsValidatorResult.InvalidValue:
-                    ConsoleUI.ShowMessage(INVALID_FORMAT);
-                    break;
                 case ArgsValidatorResult.Success:
-                    NumericalSequence sequence = GetSequence();
-                    RunWithSequence(sequence);
+                    RunConverter(Convert.ToInt32(_args[0]));
                     break;
             }
         }
 
-        private void RunWithSequence(NumericalSequence sequence)
+        private void RunConverter(int number)
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (var i in sequence)
-            {
-                sb.Append(i);
-                sb.Append(", ");
-            }
-            sb.Length -= 2;
+            NumberConverter converter = new NumberConverter(new EnglishNumbers());
+            string result = converter.Convert(number);
 
-            ConsoleUI.ShowMessage(sb.ToString());
+            ConsoleUI.ShowMessage(result);
         }
-
-        private NumericalSequence GetSequence()
-        {
-            int number = Convert.ToInt32(_args[0]);
-
-            return new NumericalSequence(number);
-        }
-
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Validation;
 
-namespace Triangles
+namespace TriangleSort
 {
     class TriangleArgsValidator : ArgsValidator, ITriangleArgsValidator
     {

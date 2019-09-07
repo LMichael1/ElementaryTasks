@@ -40,31 +40,21 @@ namespace ChessBoard
             switch (_validator.ValidateArgs())
             {
                 case ArgsValidatorResult.Empty:
-                    {
                         BoardUI.ShowMessage(HELP);
                         break;
-                    }
                 case ArgsValidatorResult.InvalidNumberOfArgs:
-                    {
                         BoardUI.ShowMessage(INVALID_NUMBER_OF_ARGS);
                         break;
-                    }
                 case ArgsValidatorResult.InvalidTypeOfArgs:
-                    {
                         BoardUI.ShowMessage(INVALID_TYPE_OF_ARGS);
                         break;
-                    }
                 case ArgsValidatorResult.InvalidValue:
-                    {
                         BoardUI.ShowMessage(INVALID_SIZE);
                         break;
-                    }
                 case ArgsValidatorResult.Success:
-                    {
                         Board checkersBoard = GetBoard();
                         RunWithBoard(checkersBoard);
                         break;
-                    }
             }
         }
 

@@ -5,18 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Validation;
 
-namespace Fibonacci
+namespace NumericIntoWords
 {
-    class SequenceArgsValidator : ArgsValidator, ISequenceArgsVaildator
+    class NumericArgsValidator : ArgsValidator, INumericArgsValidator
     {
-        public SequenceArgsValidator(string[] args, int argsLength) : base(args, argsLength)
+        public NumericArgsValidator(string[] args, int argsLength) : base(args, argsLength)
         {
 
-        }
-
-        public bool IsValuesValid(int min, int max)
-        {
-            return max > min;
         }
 
         public ArgsValidatorResult ValidateArgs()
@@ -34,14 +29,6 @@ namespace Fibonacci
             if (!IsArgsIntegers())
             {
                 return ArgsValidatorResult.InvalidTypeOfArgs;
-            }
-
-            int min = Convert.ToInt32(Args[0]);
-            int max = Convert.ToInt32(Args[1]);
-
-            if (!IsValuesValid(min, max))
-            {
-                return ArgsValidatorResult.InvalidValue;
             }
 
             return ArgsValidatorResult.Success;

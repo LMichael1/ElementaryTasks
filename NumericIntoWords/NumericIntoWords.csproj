@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6D44C8ED-DD44-4E66-A281-D2B97D8D4336}</ProjectGuid>
+    <ProjectGuid>{7B064E12-CEA5-4599-B8F1-725C62FAA2FA}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Fibonacci</RootNamespace>
-    <AssemblyName>Fibonacci</AssemblyName>
+    <RootNamespace>NumericIntoWords</RootNamespace>
+    <AssemblyName>NumericIntoWords</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -44,12 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
-    <Compile Include="FibonacciEnumerator.cs" />
-    <Compile Include="FibonacciSequence.cs" />
-    <Compile Include="IFibonacciArgsValidator.cs" />
+    <Compile Include="EnglishNumbers.cs" />
+    <Compile Include="INumberDictionary.cs" />
+    <Compile Include="INumericArgsValidator.cs" />
+    <Compile Include="NumberConverter.cs" />
+    <Compile Include="NumericArgsValidator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FibonacciArgsValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

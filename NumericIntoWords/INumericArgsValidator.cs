@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Validation;
 
-namespace TriangleSort
+namespace NumericIntoWords
 {
-    interface ITriangleArgsValidator : IArgsValidator
+    interface INumericArgsValidator
     {
-        bool IsSizesValid(params double[] sizes);
         ArgsValidatorResult ValidateArgs();
     }
 }
