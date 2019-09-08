@@ -58,7 +58,6 @@ namespace Fibonacci
                     FibonacciSequence sequence = GetSequence();
                     RunWithSequence(sequence);
                     break;
-
             }
         }
 

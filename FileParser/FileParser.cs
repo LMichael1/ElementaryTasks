@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace FileParser
         public int GetNumberOfSubstringEntries(string substring)
         {
             int result = 0;
+
             using (StreamReader reader = new StreamReader(_path))
             {
                 string line;
@@ -29,6 +31,24 @@ namespace FileParser
             }
 
             return result;
+        }
+
+        public void ReplaceAllSubstringEntries(string oldValue, string newValue)
+        {
+            string tmpPath = Path.GetTempFileName();
+
+            using (StreamReader reader = new StreamReader(_path))
+            using (StreamWriter writer = new StreamWriter(tmpPath))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    writer.WriteLine(StringParser.ReplaceSubstring(line, oldValue, newValue));
+                }
+            }
+
+            File.Delete(_path);
+            File.Move(tmpPath, _path);
         }
     }
 }

@@ -36,6 +36,11 @@ namespace TriangleSort
 
         public int CompareTo(Triangle other)
         {
+            if (Area.CompareTo(other.Area) == 0)
+            {
+                return Name.CompareTo(other.Name);
+            }
+
             return Area.CompareTo(other.Area);
         }
 

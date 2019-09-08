@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,36 +13,36 @@ namespace TriangleSort
     {
         #region Constants
 
-        private const string ENTER_TRIANGLE = "Enter the name and sides of the triangle.";
-        private const string INVALID_FORMAT = "Arguments must be numbers. Try again.";
-        private const string INVALID_ARGUMENT = "Triangle doesn's exist. Try again.";
-        private const string INVALID_NUMBER_OF_ARGS = "You must input 4 arguments separated by commas.";
-        private const string CONTINUE = "Do you want to add more triangles? (Y/N)";
-        private const string LIST = "=========== Triangles list ===========";
-
         private const double MIN_SIDE = 0.0;
-
         private const int ARGS_LENGTH = 4;
 
         #endregion
 
+        #region Fields
+
         private ITriangleArgsValidator _validator;
         private List<Triangle> _triangles;
+        private Logger _logger;
+
+        #endregion
 
         public Application(string[] args)
         {
             _validator = new TriangleArgsValidator(args, ARGS_LENGTH, MIN_SIDE);
             _triangles = new List<Triangle>();
+            _logger = LogManager.GetCurrentClassLogger();
         }
 
         public void Run()
         {
             if (_validator.IsArgsEmpty())
             {
+                _logger.Info("Running without args.");
                 RunWithoutArgs();
             }
             else
             {
+                _logger.Info("Running with args.");
                 RunWithArgs();
             }
         }
@@ -50,7 +51,7 @@ namespace TriangleSort
         {
             GetTriangle();
 
-            if (ConsoleUI.WillContinue(CONTINUE))
+            if (ConsoleUI.WillContinue(StringConstants.CONTINUE))
             {
                 RunWithoutArgs();
             }
@@ -64,7 +65,7 @@ namespace TriangleSort
 
                 GetTriangle();
             }
-            while (ConsoleUI.WillContinue(CONTINUE));
+            while (ConsoleUI.WillContinue(StringConstants.CONTINUE));
 
             if (_triangles.Count > 0)
             {
@@ -74,7 +75,7 @@ namespace TriangleSort
 
         private string[] GetArgs()
         {
-            string userInput = ConsoleUI.GetValueFromInput(ENTER_TRIANGLE);
+            string userInput = ConsoleUI.GetValueFromInput(StringConstants.ENTER_TRIANGLE);
             string[] result = userInput.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
             return result;
@@ -85,20 +86,30 @@ namespace TriangleSort
             switch (_validator.ValidateArgs())
             {
                 case ArgsValidatorResult.InvalidNumberOfArgs:
-                    ConsoleUI.ShowMessage(INVALID_NUMBER_OF_ARGS);
+                    _logger.Error("Invalid number of arguments.");
+                    ConsoleUI.ShowMessage(StringConstants.INVALID_NUMBER_OF_ARGS);
                     break;
+
                 case ArgsValidatorResult.InvalidTypeOfArgs:
-                    ConsoleUI.ShowMessage(INVALID_FORMAT);
+                    _logger.Error("Invalid type of arguments.");
+                    ConsoleUI.ShowMessage(StringConstants.INVALID_FORMAT);
                     break;
+
                 case ArgsValidatorResult.InvalidValue:
-                    ConsoleUI.ShowMessage(INVALID_ARGUMENT);
+                    _logger.Error("Invalid value of argument.");
+                    ConsoleUI.ShowMessage(StringConstants.INVALID_ARGUMENT);
                     break;
+
                 case ArgsValidatorResult.Success:
                     double firstSide = Convert.ToDouble(_validator.Args[1]);
                     double secondSide = Convert.ToDouble(_validator.Args[2]);
                     double thirdSide = Convert.ToDouble(_validator.Args[3]);
 
                     Triangle item = new Triangle(_validator.Args[0], firstSide, secondSide, thirdSide);
+
+                    string loggerMessage = string.Format("Triangle created: {0}", item.ToString());
+                    _logger.Info(loggerMessage);
+
                     _triangles.Add(item);
                     break;
             }
@@ -108,9 +119,10 @@ namespace TriangleSort
         {
             _triangles.Sort(new SortTrianglesDescendingHelper());
 
-            ConsoleUI.ShowMessage(LIST);
+            ConsoleUI.ShowMessage(StringConstants.LIST);
 
             ConsoleUI.Display(_triangles);
+            _logger.Info("Success.");
         }
     }
 }

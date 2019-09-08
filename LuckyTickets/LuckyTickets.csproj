@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{51323C45-2FC1-4497-A8B2-B3A55952ACBE}</ProjectGuid>
+    <ProjectGuid>{0B77702F-B2C2-4FA6-9EB1-6F4A84F31264}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>FileParser</RootNamespace>
-    <AssemblyName>FileParser</AssemblyName>
+    <RootNamespace>LuckyTickets</RootNamespace>
+    <AssemblyName>LuckyTickets</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,16 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.6.7\lib\net45\NLog.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,33 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application.cs" />
-    <Compile Include="FileParser.cs" />
-    <Compile Include="IParserArgsValidator.cs" />
-    <Compile Include="ParserArgsValidator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StringParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Content Include="NLog.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="NLog.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\UserInterface\UserInterface.csproj">
-      <Project>{598BBE00-D11C-4B53-849C-8F4A667396CE}</Project>
-      <Name>UserInterface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Validation\Validation.csproj">
-      <Project>{EB67766B-4732-4C7F-8A36-2F215C7AAFCA}</Project>
-      <Name>Validation</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

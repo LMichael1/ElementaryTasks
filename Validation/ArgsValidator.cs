@@ -4,13 +4,17 @@ namespace Validation
 {
     public class ArgsValidator : IArgsValidator
     {
-        #region Private fields
+        #region Fields
 
-        private readonly int _argsLength;
+        protected readonly int _argsLength;
 
         #endregion
 
-        public string[] Args { get; set; }
+        #region Properties
+
+        public string[] Args { get; set; } 
+
+        #endregion
 
         public ArgsValidator(string[] args, int argsLength)
         {

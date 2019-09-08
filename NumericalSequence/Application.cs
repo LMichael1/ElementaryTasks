@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,6 @@ namespace NumericalSequence
     {
         #region Constants
 
-        private const string INVALID_NUMBER_OF_ARGS = "You must input 1 argument.";
-        private const string INVALID_FORMAT = "Argument must be a natural number. Try again.";
-        private const string HELP = "Enter the number to get a sequence of natural numbers whose square is less than a given number.";
-
         private const int ARGS_LENGTH = 1;
         private const int MIN_VALUE = 2;
 
@@ -25,6 +22,7 @@ namespace NumericalSequence
 
         private readonly ISequenceArgsValidator _validator;
         private readonly string[] _args;
+        private Logger _logger;
 
         #endregion
 
@@ -32,6 +30,7 @@ namespace NumericalSequence
         {
             _validator = new SequenceArgsValidator(args, ARGS_LENGTH, MIN_VALUE);
             _args = args;
+            _logger = LogManager.GetCurrentClassLogger();
         }
 
         public void Run()
@@ -39,17 +38,25 @@ namespace NumericalSequence
             switch (_validator.ValidateArgs())
             {
                 case ArgsValidatorResult.Empty:
-                    ConsoleUI.ShowMessage(HELP);
+                    _logger.Error("Argbments are empty.");
+                    ConsoleUI.ShowMessage(StringConstants.HELP);
                     break;
+
                 case ArgsValidatorResult.InvalidNumberOfArgs:
-                    ConsoleUI.ShowMessage(INVALID_NUMBER_OF_ARGS);
+                    _logger.Error("Invalid number of arguments.");
+                    ConsoleUI.ShowMessage(StringConstants.INVALID_NUMBER_OF_ARGS);
                     break;
+
                 case ArgsValidatorResult.InvalidTypeOfArgs:
-                    ConsoleUI.ShowMessage(INVALID_FORMAT);
+                    _logger.Error("Invalid type of arguments.");
+                    ConsoleUI.ShowMessage(StringConstants.INVALID_FORMAT);
                     break;
+
                 case ArgsValidatorResult.InvalidValue:
-                    ConsoleUI.ShowMessage(INVALID_FORMAT);
+                    _logger.Error("Invalid values of arguments.");
+                    ConsoleUI.ShowMessage(StringConstants.INVALID_FORMAT);
                     break;
+
                 case ArgsValidatorResult.Success:
                     NumericalSequence sequence = GetSequence();
                     RunWithSequence(sequence);
@@ -60,14 +67,15 @@ namespace NumericalSequence
         private void RunWithSequence(NumericalSequence sequence)
         {
             StringBuilder sb = new StringBuilder();
+
             foreach (var i in sequence)
             {
-                sb.Append(i);
-                sb.Append(", ");
+                sb.AppendFormat("{0}, ", i);
             }
             sb.Length -= 2;
 
             ConsoleUI.ShowMessage(sb.ToString());
+            _logger.Info("Success");
         }
 
         private NumericalSequence GetSequence()

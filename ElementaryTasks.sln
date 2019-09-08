@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileParser", "FileParser\Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumericIntoWords", "NumericIntoWords\NumericIntoWords.csproj", "{7B064E12-CEA5-4599-B8F1-725C62FAA2FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuckyTickets", "LuckyTickets\LuckyTickets.csproj", "{0B77702F-B2C2-4FA6-9EB1-6F4A84F31264}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TriangleSort.Tests", "TriangleSort.Tests\TriangleSort.Tests.csproj", "{20F33FF3-6636-4C63-AAAD-CDF2933EF53F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,14 @@ Global
 		{7B064E12-CEA5-4599-B8F1-725C62FAA2FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B064E12-CEA5-4599-B8F1-725C62FAA2FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B064E12-CEA5-4599-B8F1-725C62FAA2FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B77702F-B2C2-4FA6-9EB1-6F4A84F31264}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B77702F-B2C2-4FA6-9EB1-6F4A84F31264}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B77702F-B2C2-4FA6-9EB1-6F4A84F31264}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B77702F-B2C2-4FA6-9EB1-6F4A84F31264}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20F33FF3-6636-4C63-AAAD-CDF2933EF53F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20F33FF3-6636-4C63-AAAD-CDF2933EF53F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20F33FF3-6636-4C63-AAAD-CDF2933EF53F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20F33FF3-6636-4C63-AAAD-CDF2933EF53F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
