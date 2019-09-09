@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TriangleSort
 {
-    class TriangleValidator
+    public class TriangleValidator
     {
         public static bool IsTriangleExists(double firstSide, double secondSide, double thirdSide)
         {

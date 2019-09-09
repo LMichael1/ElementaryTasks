@@ -7,7 +7,7 @@ using Validation;
 
 namespace TriangleSort
 {
-    class TriangleArgsValidator : ArgsValidator, ITriangleArgsValidator
+    public class TriangleArgsValidator : ArgsValidator, ITriangleArgsValidator
     {
         #region Properties
 
@@ -20,13 +20,13 @@ namespace TriangleSort
             _minSide = minSide;
         }
 
-        public bool IsSizesValid(params double[] sizes)
+        private bool IsSizesValid(params double[] sizes)
         {
             bool result = true;
 
             foreach (var s in sizes)
             {
-                if (s < _minSide)
+                if (s <= _minSide)
                 {
                     result = false;
                     break;

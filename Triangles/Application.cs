@@ -76,7 +76,7 @@ namespace TriangleSort
         private string[] GetArgs()
         {
             string userInput = ConsoleUI.GetValueFromInput(StringConstants.ENTER_TRIANGLE);
-            string[] result = userInput.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] result = userInput.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
 
             return result;
         }

@@ -7,9 +7,8 @@ using Validation;
 
 namespace TriangleSort
 {
-    interface ITriangleArgsValidator : IArgsValidator
+    public interface ITriangleArgsValidator : IArgsValidator
     {
-        bool IsSizesValid(params double[] sizes);
         ArgsValidatorResult ValidateArgs();
     }
 }

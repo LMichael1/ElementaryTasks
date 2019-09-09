@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TriangleSort
 {
-    class Triangle : IComparable<Triangle>
+    public class Triangle : IComparable<Triangle>
     {
         #region Properties 
 
