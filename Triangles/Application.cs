@@ -22,7 +22,7 @@ namespace TriangleSort
 
         private ITriangleArgsValidator _validator;
         private List<Triangle> _triangles;
-        private Logger _logger;
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         #endregion
 
@@ -30,7 +30,6 @@ namespace TriangleSort
         {
             _validator = new TriangleArgsValidator(args, ARGS_LENGTH, MIN_SIDE);
             _triangles = new List<Triangle>();
-            _logger = LogManager.GetCurrentClassLogger();
         }
 
         public void Run()
