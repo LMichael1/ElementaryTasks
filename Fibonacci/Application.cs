@@ -16,6 +16,7 @@ namespace Fibonacci
         private const string INVALID_FORMAT = "Arguments must be numbers. Try again.";
         private const string INVALID_SIZE = "Second argument must be greater than first. Try again.";
         private const string HELP = "Enter the range for the Fibonacci sequence.";
+        private const string NO_FIBONACCI = "No fibonacci numbers in range.";
 
         private const int ARGS_LENGTH = 2;
 
@@ -69,9 +70,16 @@ namespace Fibonacci
             {
                 stringBuilder.AppendFormat("{0}, ", i);
             }
-            stringBuilder.Length -= 2;
 
-            ConsoleUI.ShowMessage(stringBuilder.ToString());
+            if (stringBuilder.Length > 0)
+            {
+                stringBuilder.Length -= 2;
+                ConsoleUI.ShowMessage(stringBuilder.ToString());
+            }
+            else
+            {
+                ConsoleUI.ShowMessage(NO_FIBONACCI);
+            }
         }
 
         private FibonacciSequence GetSequence()
