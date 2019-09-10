@@ -23,14 +23,7 @@ namespace NumericalSequence
         {
             get
             {
-                try
-                {
-                    return Current;
-                }
-                catch (InvalidOperationException)
-                {
-                    throw;
-                }
+                return Current;
             }
         }
 
@@ -44,7 +37,7 @@ namespace NumericalSequence
                 }
                 return _position;
             }
-        } 
+        }
 
         #endregion
 

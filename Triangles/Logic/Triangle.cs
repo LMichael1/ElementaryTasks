@@ -10,13 +10,17 @@ namespace TriangleSort
     {
         #region Properties 
 
-        public string Name { get; }
-        public double FirstSide { get; }
-        public double SecondSide { get; }
-        public double ThirdSide { get; }
-        public double SemiPerimeter
+        public string Name { get; private set; }
+        public double FirstSide { get; private set; }
+        public double SecondSide { get; private set; }
+        public double ThirdSide { get; private set; }
+        public double Perimeter
         {
-            get => (FirstSide + SecondSide + ThirdSide) / 2;
+            get => FirstSide + SecondSide + ThirdSide;
+        }
+        private double SemiPerimeter
+        {
+            get => Perimeter / 2;
         }
         public double Area
         {

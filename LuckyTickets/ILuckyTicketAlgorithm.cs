@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace LuckyTickets
 {
-    class Program
+    interface ILuckyTicketAlgorithm
     {
-        static void Main(string[] args)
-        {
-            new Application(args).Run();
-
-            Console.ReadKey();
-        }
+        int GetNumberOfLuckyTickets();
     }
 }

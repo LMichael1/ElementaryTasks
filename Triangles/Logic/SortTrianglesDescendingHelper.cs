@@ -10,16 +10,7 @@ namespace TriangleSort
     {
         public int Compare(Triangle x, Triangle y)
         {
-            if (x.Area > y.Area)
-            {
-                return -1;
-            }
-            if (x.Area < y.Area)
-            {
-                return 1;
-            }
-
-            return y.Name.CompareTo(x.Name);
+            return y.CompareTo(x);
         }
     }
 }

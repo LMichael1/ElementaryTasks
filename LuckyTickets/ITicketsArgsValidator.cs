@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Validation;
 
 namespace LuckyTickets
 {
-    class Program
+    interface ITicketsArgsValidator : IArgsValidator
     {
-        static void Main(string[] args)
-        {
-            new Application(args).Run();
-
-            Console.ReadKey();
-        }
+        ArgsValidatorResult ValidateArgs();
     }
 }
+
