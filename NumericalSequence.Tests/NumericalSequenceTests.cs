@@ -10,13 +10,30 @@ namespace NumericalSequence.Tests
 {
     public class NumericalSequenceTests
     {
-        [Fact]
-        public void TestSequenceInRange()
+        [Theory]
+        [InlineData(5, 81, 5, 6, 7, 8)]
+        [InlineData(2, 9, 2)]
+        [InlineData(12, 225, 12, 13, 14)]
+        [InlineData(1, 67, 1, 2, 3, 4, 5, 6, 7, 8)]
+        [InlineData(2, 10, 2, 3)]
+        public void SequenceInInterval(int minSquare, int maxSquare, params int[] expected)
         {
-            NumericalSequence sequence = new NumericalSequence(25);
-            int[] s = sequence.ToArray();
-            int[] s1 = { 1, 2, 3, 4 };
-            Assert.Equal(s, s1);
+            NumericalSequence sequence = new NumericalSequence(minSquare, maxSquare);
+            int[] array = sequence.ToArray();
+
+            Assert.Equal(expected, array);
+        }
+
+        [Theory]
+        [InlineData(5, 1, 2)]
+        [InlineData(16, 1, 2, 3)]
+        [InlineData(2, 1)]
+        public void NormalSequence(int maxSquare, params int[] expected)
+        {
+            NumericalSequence sequence = new NumericalSequence(maxSquare);
+            int[] array = sequence.ToArray();
+
+            Assert.Equal(expected, array);
         }
     }
 }

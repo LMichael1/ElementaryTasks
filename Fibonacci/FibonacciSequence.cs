@@ -14,41 +14,22 @@ namespace Fibonacci
         private int _minNumber;
         private int _maxNumber;
 
-        private int _x;
-        private int _y;
-        private int _z;
-
         #endregion
 
         public FibonacciSequence(int minNumber, int maxNumber)
         {
             _minNumber = minNumber;
             _maxNumber = maxNumber;
-
-            FindFirstFibonacci();
         }
 
         public IEnumerator<int> GetEnumerator()
         {
-            return new FibonacciEnumerator(_maxNumber, _x, _y, _z);
-        }
-        //TODO: В ЕНУМЕРАТОР
-        private void FindFirstFibonacci()
-        {
-            _x = 0;
-            _y = 1;
-            _z = 0;
-            while (_x + _y < _minNumber)
-            {
-                _z = _x + _y;
-                _x = _y;
-                _y = _z;
-            }
+            return new FibonacciEnumerator(_minNumber, _maxNumber);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return new FibonacciEnumerator(_maxNumber, _x, _y, _z);
+            return new FibonacciEnumerator(_minNumber, _maxNumber);
         }
     }
 }

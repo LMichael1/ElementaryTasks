@@ -11,8 +11,6 @@ namespace NumericalSequence
         static void Main(string[] args)
         {
             new Application(args).Run();
-
-            Console.ReadKey();
         }
     }
 }

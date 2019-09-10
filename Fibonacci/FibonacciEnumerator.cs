@@ -27,18 +27,7 @@ namespace Fibonacci
 
         #endregion
 
-        public FibonacciEnumerator(int maxNumber, int x, int y, int z)
-        {
-            _maxNumber = maxNumber;
-
-            _startPosition = z;
-            _startX = x;
-            _startY = y;
-
-            _position = z;
-            _x = x;
-            _y = y;
-        }
+        #region Properties
 
         public int Current
         {
@@ -58,11 +47,37 @@ namespace Fibonacci
             {
                 return Current;
             }
+        } 
+
+        #endregion
+
+        public FibonacciEnumerator(int minNumber, int maxNumber)
+        {
+            _maxNumber = maxNumber;
+
+            FindFirstFibonacci(minNumber);
+
+            _startPosition = _position;
+            _startX = _x;
+            _startY = _y;
+        }
+
+        private void FindFirstFibonacci(int minNumber)
+        {
+            _x = 0;
+            _y = 1;
+            _position = 0;
+            while (_x + _y < minNumber)
+            {
+                _position = _x + _y;
+                _x = _y;
+                _y = _position;
+            }
         }
 
         public void Dispose()
         {
-
+            //No resources to dispose
         }
 
         public bool MoveNext()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,28 +12,35 @@ namespace NumericalSequence
     {
         #region Fields
 
-        private int _minNumber;
+        private int _startNumber;
         private int _maxNumber;
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         #endregion
 
-        public NumericalSequence(int maxSquare)
+        public NumericalSequence(int square)
         {
-            _minNumber = 1;
-            _maxNumber = GetMaxNumber(maxSquare);
+            _startNumber = 1;
+            _maxNumber = GetMaxNumber(square);
+
+            _logger.Info("Sequence created. Square: {0}, Max number: {1}", 
+                square, _maxNumber);
         }
 
-        public NumericalSequence(int minSquare, int maxSquare)
+        public NumericalSequence(int startNumber, int maxSquare)
         {
-            _minNumber = GetMinNumber(minSquare);
+            _startNumber = startNumber;
             _maxNumber = GetMaxNumber(maxSquare);
+
+            _logger.Info("Sequence created. Start number: {0}, Square: {2}, Max number: {2}",
+                startNumber, maxSquare, _maxNumber);
         }
 
-        private int GetMaxNumber(int n)
+        private int GetMaxNumber(int square)
         {
-            int number = (int)Math.Sqrt(n);
+            int number = (int)Math.Sqrt(square);
 
-            if (Math.Pow(number, 2) == n)
+            if (Math.Pow(number, 2) == square)
             {
                 number--;
             }
@@ -40,26 +48,14 @@ namespace NumericalSequence
             return number;
         }
 
-        private int GetMinNumber(int n)
-        {
-            int number = (int)Math.Sqrt(n);
-
-            if (Math.Pow(number, 2) == n)
-            {
-                number++;
-            }
-
-            return number;
-        }
-
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return new NumericalSequenceEnumerator(_minNumber, _maxNumber);
+            return new NumericalSequenceEnumerator(_startNumber - 1, _maxNumber);
         }
 
         public IEnumerator<int> GetEnumerator()
         {
-            return new NumericalSequenceEnumerator(_minNumber, _maxNumber);
+            return new NumericalSequenceEnumerator(_startNumber - 1, _maxNumber);
         }
     }
 }

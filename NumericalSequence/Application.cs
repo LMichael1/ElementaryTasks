@@ -22,7 +22,7 @@ namespace NumericalSequence
 
         private readonly ISequenceArgsValidator _validator;
         private readonly string[] _args;
-        private Logger _logger;
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         #endregion
 
@@ -30,7 +30,6 @@ namespace NumericalSequence
         {
             _validator = new SequenceArgsValidator(args, ARGS_LENGTH, MIN_VALUE);
             _args = args;
-            _logger = LogManager.GetCurrentClassLogger();
         }
 
         public void Run()
@@ -38,7 +37,7 @@ namespace NumericalSequence
             switch (_validator.ValidateArgs())
             {
                 case ArgsValidatorResult.Empty:
-                    _logger.Error("Argbments are empty.");
+                    _logger.Error("Arguments are empty.");
                     ConsoleUI.ShowMessage(StringConstants.HELP);
                     break;
 
@@ -62,6 +61,8 @@ namespace NumericalSequence
                     RunWithSequence(sequence);
                     break;
             }
+
+            ConsoleUI.PressKeyToContinue(StringConstants.PRESS_KEY_TO_CONTINUE);
         }
 
         private void RunWithSequence(NumericalSequence sequence)
@@ -74,6 +75,7 @@ namespace NumericalSequence
             }
             sb.Length -= 2;
 
+            ConsoleUI.ShowMessage(StringConstants.SEQUENCE);
             ConsoleUI.ShowMessage(sb.ToString());
             _logger.Info("Success");
         }

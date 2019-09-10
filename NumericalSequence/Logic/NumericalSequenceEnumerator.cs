@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,43 +12,55 @@ namespace NumericalSequence
     {
         #region Private fields
 
-        private int _minNumber;
+        private readonly int _startNumber;
 
-        private int _maxNumber;
+        private readonly int _maxNumber;
 
         private int _position;
+
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         #endregion
 
         #region Properties
 
-        public object Current
+        public int Current
         {
             get
             {
-                return Current;
+                if (_position == _startNumber || _position > _maxNumber)
+                {
+                    _logger.Error("Position is out of range: {0}", _position);
+
+                    throw new InvalidOperationException();
+                }
+
+                _logger.Info("Returning int position: {0}", _position);
+
+                return _position;
             }
         }
 
-        int IEnumerator<int>.Current
+        object IEnumerator.Current
         {
             get
             {
-                if (_position == _minNumber || _position > _maxNumber)
-                {
-                    throw new InvalidOperationException();
-                }
-                return _position;
+                _logger.Info("Returning object position: {0}", Current);
+
+                return Current;
             }
         }
 
         #endregion
 
-        public NumericalSequenceEnumerator(int minNumber, int maxNumber)
+        public NumericalSequenceEnumerator(int startNumber, int maxNumber)
         {
-            _position = minNumber - 1;
-            _minNumber = minNumber - 1;
+            _position = startNumber;
+            _startNumber = startNumber;
             _maxNumber = maxNumber;
+
+            _logger.Info("Enumerator created. Start number: {0}, Max number: {1}",
+                startNumber, maxNumber);
         }
 
         public bool MoveNext()
@@ -56,15 +69,22 @@ namespace NumericalSequence
             {
                 _position++;
 
+                _logger.Info("Moving next. New position: {0}", _position);
+
                 return true;
             }
+
+            _logger.Warn("Moving next is not possible. Position: {0}",
+                _position);
 
             return false;
         }
 
         public void Reset()
         {
-            _position = 0;
+            _position = _startNumber;
+
+            _logger.Info("Position reseted to value {0}", _position);
         }
 
         public void Dispose()
