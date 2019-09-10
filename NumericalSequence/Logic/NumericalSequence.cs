@@ -7,39 +7,59 @@ using System.Threading.Tasks;
 
 namespace NumericalSequence
 {
-    class NumericalSequence : IEnumerable<int>
+    public class NumericalSequence : IEnumerable<int>
     {
         #region Fields
 
+        private int _minNumber;
         private int _maxNumber;
 
         #endregion
 
-        public NumericalSequence(int n)
+        public NumericalSequence(int maxSquare)
         {
-            _maxNumber = GetMaxNumber(n);
+            _minNumber = 1;
+            _maxNumber = GetMaxNumber(maxSquare);
+        }
+
+        public NumericalSequence(int minSquare, int maxSquare)
+        {
+            _minNumber = GetMinNumber(minSquare);
+            _maxNumber = GetMaxNumber(maxSquare);
         }
 
         private int GetMaxNumber(int n)
         {
-            int count = (int)Math.Sqrt(n);
+            int number = (int)Math.Sqrt(n);
 
-            if (Math.Pow(count, 2) == n)
+            if (Math.Pow(number, 2) == n)
             {
-                count--;
+                number--;
             }
 
-            return count;
+            return number;
+        }
+
+        private int GetMinNumber(int n)
+        {
+            int number = (int)Math.Sqrt(n);
+
+            if (Math.Pow(number, 2) == n)
+            {
+                number++;
+            }
+
+            return number;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return new NumericalSequenceEnumerator(_maxNumber);
+            return new NumericalSequenceEnumerator(_minNumber, _maxNumber);
         }
 
         public IEnumerator<int> GetEnumerator()
         {
-            return new NumericalSequenceEnumerator(_maxNumber);
+            return new NumericalSequenceEnumerator(_minNumber, _maxNumber);
         }
     }
 }

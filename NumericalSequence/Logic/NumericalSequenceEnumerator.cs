@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace NumericalSequence
 {
-    class NumericalSequenceEnumerator : IEnumerator<int>
+    public class NumericalSequenceEnumerator : IEnumerator<int>
     {
         #region Private fields
+
+        private int _minNumber;
 
         private int _maxNumber;
 
@@ -31,7 +33,7 @@ namespace NumericalSequence
         {
             get
             {
-                if (_position == 0 || _position > _maxNumber)
+                if (_position == _minNumber || _position > _maxNumber)
                 {
                     throw new InvalidOperationException();
                 }
@@ -41,9 +43,10 @@ namespace NumericalSequence
 
         #endregion
 
-        public NumericalSequenceEnumerator(int maxNumber)
+        public NumericalSequenceEnumerator(int minNumber, int maxNumber)
         {
-            _position = 0;
+            _position = minNumber - 1;
+            _minNumber = minNumber - 1;
             _maxNumber = maxNumber;
         }
 

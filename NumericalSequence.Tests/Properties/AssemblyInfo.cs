@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанные со сборкой.
-[assembly: AssemblyTitle("TriangleSort.Tests")]
+[assembly: AssemblyTitle("NumericalSequence.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TriangleSort.Tests")]
+[assembly: AssemblyProduct("NumericalSequence.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("dc39dfbd-d39b-4111-991a-e7264172a19c")]
+[assembly: Guid("7c2d3e12-0097-47d1-b321-53b355631d2c")]
 
 // Сведения о версии сборки состоят из указанных ниже четырех значений:
 //

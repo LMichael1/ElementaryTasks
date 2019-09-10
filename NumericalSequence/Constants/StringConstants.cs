@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NumericalSequence
 {
-    static class StringConstants
+    public static class StringConstants
     {
         public const string INVALID_NUMBER_OF_ARGS = "You must input 1 argument.";
         public const string INVALID_FORMAT = "Argument must be a natural number. Try again.";

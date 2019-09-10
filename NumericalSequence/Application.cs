@@ -9,7 +9,7 @@ using Validation;
 
 namespace NumericalSequence
 {
-    class Application
+    public class Application
     {
         #region Constants
 

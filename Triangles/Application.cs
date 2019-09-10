@@ -9,7 +9,7 @@ using Validation;
 
 namespace TriangleSort
 {
-    class Application
+    public class Application
     {
         #region Constants
 
@@ -44,6 +44,8 @@ namespace TriangleSort
                 _logger.Info("Running with args.");
                 RunWithArgs();
             }
+
+            ConsoleUI.PressKeyToContinue(StringConstants.PRESS_KEY_TO_CONTINUE);
         }
 
         private void RunWithArgs()
@@ -60,6 +62,8 @@ namespace TriangleSort
         {
             do
             {
+                _logger.Info("Getting values from user input...");
+
                 _validator.Args = GetArgs();
 
                 GetTriangle();
@@ -68,8 +72,11 @@ namespace TriangleSort
 
             if (_triangles.Count > 0)
             {
+                _logger.Info("List created. Running sorting...");
                 RunProgram();
             }
+
+            _logger.Warn("No triangles added.");
         }
 
         private string[] GetArgs()
@@ -95,7 +102,7 @@ namespace TriangleSort
                     break;
 
                 case ArgsValidatorResult.InvalidValue:
-                    _logger.Error("Invalid value of argument.");
+                    _logger.Error("Invalid values of arguments.");
                     ConsoleUI.ShowMessage(StringConstants.INVALID_ARGUMENT);
                     break;
 
@@ -105,11 +112,9 @@ namespace TriangleSort
                     double thirdSide = Convert.ToDouble(_validator.Args[3]);
 
                     Triangle item = new Triangle(_validator.Args[0], firstSide, secondSide, thirdSide);
-
-                    string loggerMessage = string.Format("Triangle created: {0}", item.ToString());
-                    _logger.Info(loggerMessage);
-
                     _triangles.Add(item);
+
+                    _logger.Info("Triangle added to list: {0}", item.ToString());
                     break;
             }
         }
@@ -119,9 +124,9 @@ namespace TriangleSort
             _triangles.Sort(new SortTrianglesDescendingHelper());
 
             ConsoleUI.ShowMessage(StringConstants.LIST);
-
             ConsoleUI.Display(_triangles);
-            _logger.Info("Success.");
+
+            _logger.Info("Triangle list displayed.");
         }
     }
 }

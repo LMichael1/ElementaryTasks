@@ -29,13 +29,13 @@ namespace Validation
 
         public bool IsIntegers(params string[] values)
         {
-            bool result = false;
+            bool result = true;
 
             foreach (var value in values)
             {
-                if (int.TryParse(value, out _))
+                if (!int.TryParse(value, out _))
                 {
-                    result = true;
+                    result = false;
                 }
             }
 
@@ -49,13 +49,13 @@ namespace Validation
 
         public bool IsDoubles(params string[] values)
         {
-            bool result = false;
+            bool result = true;
 
             foreach (var value in values)
             {
-                if (double.TryParse(value, out _))
+                if (!double.TryParse(value, out _))
                 {
-                    result = true;
+                    result = false;
                 }
             }
 

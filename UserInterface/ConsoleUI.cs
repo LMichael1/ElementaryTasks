@@ -32,6 +32,13 @@ namespace UserInterface
             return (answer == "Y" || answer == "YES");
         }
 
+        public static void PressKeyToContinue(string messageToShow)
+        {
+            Console.WriteLine(messageToShow);
+
+            Console.ReadKey();
+        }
+
         public static void ResetConsoleColors()
         {
             Console.ForegroundColor = ConsoleColor.Gray;

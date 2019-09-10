@@ -9,7 +9,7 @@ namespace TriangleSort
 {
     public class TriangleArgsValidator : ArgsValidator, ITriangleArgsValidator
     {
-        #region Properties
+        #region Fields
 
         private readonly double _minSide;
 

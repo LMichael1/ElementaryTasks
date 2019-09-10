@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Validation;
@@ -12,41 +11,61 @@ namespace TriangleSort.Tests
     public class TriangleArgsValidatorTests
     {
         [Theory]
-        [InlineData(new string[] { "test", "1,0", "2,0", "2,0"}, 4, 0.0)]
-        [InlineData(new string[] { "test", "5,0", "4,0", "2,0" }, 4, 0.0)]
-        [InlineData(new string[] { "test", "123,2", "51,1", "83,7" }, 4, 0.0)]
-        public void SizesValid(string[] args, int argsLength, double minSide)
+        [InlineData()]
+        public void ArgsEmpty(params string[] args)
         {
-            ITriangleArgsValidator validator = new TriangleArgsValidator(args, argsLength, minSide);
+            ITriangleArgsValidator validator = new TriangleArgsValidator(args, 4, 0.0);
+            ArgsValidatorResult result = validator.ValidateArgs();
 
-            double firstSide = Convert.ToDouble(args[1]);
-            double secondSide = Convert.ToDouble(args[2]);
-            double thirdSide = Convert.ToDouble(args[3]);
-
-            Type testType = validator.GetType();
-            var method = testType.GetMethod("IsSizesValid", BindingFlags.NonPublic | BindingFlags.Instance);
-            bool result = (bool)method.Invoke(validator, new object[] { new double[] { firstSide, secondSide, thirdSide } });
-
-            Assert.True(result);
+            Assert.Equal(ArgsValidatorResult.Empty, result);
         }
 
         [Theory]
-        [InlineData(new string[] { "test", "0,0", "2,0", "2,0" }, 4, 0.0)]
-        [InlineData(new string[] { "test", "5,0", "-4,0", "2,0" }, 4, 0.0)]
-        [InlineData(new string[] { "test", "123,2", "51,1", "-83,7" }, 4, 0.0)]
-        public void SizesInvalid(string[] args, int argsLength, double minSide)
+        [InlineData("a")]
+        [InlineData("a", "b")]
+        [InlineData("a", "1", "3")]
+        public void InvalidNumberOfArgs(params string[] args)
         {
-            ITriangleArgsValidator validator = new TriangleArgsValidator(args, argsLength, minSide);
+            ITriangleArgsValidator validator = new TriangleArgsValidator(args, 4, 0.0);
+            ArgsValidatorResult result = validator.ValidateArgs();
 
-            double firstSide = Convert.ToDouble(args[1]);
-            double secondSide = Convert.ToDouble(args[2]);
-            double thirdSide = Convert.ToDouble(args[3]);
+            Assert.Equal(ArgsValidatorResult.InvalidNumberOfArgs, result);
+        }
 
-            Type testType = validator.GetType();
-            var method = testType.GetMethod("IsSizesValid", BindingFlags.NonPublic | BindingFlags.Instance);
-            bool result = (bool)method.Invoke(validator, new object[] { new double[] { firstSide, secondSide, thirdSide } });
+        [Theory]
+        [InlineData("name1", "a", "b", "c")]
+        [InlineData("name2", "b", "1,0", "2,0")]
+        [InlineData("name3", "1.0", "3.0", "g")]
+        public void InvalidTypeOfArgs(params string[] args)
+        {
+            ITriangleArgsValidator validator = new TriangleArgsValidator(args, 4, 0.0);
+            ArgsValidatorResult result = validator.ValidateArgs();
 
-            Assert.False(result);
+            Assert.Equal(ArgsValidatorResult.InvalidTypeOfArgs, result);
+        }
+
+        [Theory]
+        [InlineData("name1", "0,0", "5,0", "5,0")]
+        [InlineData("name2", "-5,2", "1,0", "2,0")]
+        [InlineData("name3", "2", "3", "5")]
+        public void InvalidSizes(params string[] args)
+        {
+            ITriangleArgsValidator validator = new TriangleArgsValidator(args, 4, 0.0);
+            ArgsValidatorResult result = validator.ValidateArgs();
+
+            Assert.Equal(ArgsValidatorResult.InvalidValue, result);
+        }
+
+        [Theory]
+        [InlineData("name1", "1", "1,7", "1")]
+        [InlineData("name2", "5", "6", "7")]
+        [InlineData("name3", "3,2", "3,3", "2,1")]
+        public void ValidArgs(params string[] args)
+        {
+            ITriangleArgsValidator validator = new TriangleArgsValidator(args, 4, 0.0);
+            ArgsValidatorResult result = validator.ValidateArgs();
+
+            Assert.Equal(ArgsValidatorResult.Success, result);
         }
     }
 }

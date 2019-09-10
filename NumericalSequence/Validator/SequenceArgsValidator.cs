@@ -7,7 +7,7 @@ using Validation;
 
 namespace NumericalSequence
 {
-    class SequenceArgsValidator : ArgsValidator, ISequenceArgsValidator
+    public class SequenceArgsValidator : ArgsValidator, ISequenceArgsValidator
     {
         #region Private fields
 
