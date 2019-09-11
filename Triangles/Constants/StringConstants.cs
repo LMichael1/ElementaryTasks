@@ -15,5 +15,6 @@ namespace TriangleSort
         public const string CONTINUE = "Do you want to continue? (Y/N)";
         public const string LIST = "=========== Triangles list ===========";
         public const string PRESS_KEY_TO_CONTINUE = "Press any key to continue.";
+        public const string ARGUMENT_NULL = "Argument must be initialized.";
     }
 }

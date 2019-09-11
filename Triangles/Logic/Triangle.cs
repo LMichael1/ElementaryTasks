@@ -54,6 +54,12 @@ namespace TriangleSort
 
         public int CompareTo(Triangle other)
         {
+            if (other == null)
+            {
+                _logger.Error("Comparsion with not initialized triangle.");
+                throw new ArgumentNullException(StringConstants.ARGUMENT_NULL);
+            }
+
             _logger.Info("Comparing triangle {0} with triangle {1}...",
                 Name, other.Name);
 

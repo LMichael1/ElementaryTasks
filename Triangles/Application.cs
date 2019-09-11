@@ -121,7 +121,7 @@ namespace TriangleSort
 
         private void RunProgram()
         {
-            _triangles.Sort(new SortTrianglesDescendingHelper());
+            _triangles.Sort(new TriangleComparerDescending());
 
             ConsoleUI.ShowMessage(StringConstants.LIST);
             ConsoleUI.Display(_triangles);

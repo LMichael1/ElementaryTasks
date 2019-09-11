@@ -12,21 +12,21 @@ namespace NumericalSequence.Tests
     {
         [Theory]
         [InlineData()]
-        public void ArgsEmpty(params string[] args)
+        public void Validate_Args_ReturnsEmpty(params string[] args)
         {
-            ISequenceArgsValidator validator = new SequenceArgsValidator(args, 1, 2);
+            ISequenceArgsValidator validator = new SequenceArgsValidator(args, 1, 2, 2);
             ArgsValidatorResult result = validator.ValidateArgs();
 
             Assert.Equal(ArgsValidatorResult.Empty, result);
         }
 
         [Theory]
-        [InlineData("1", "2")]
         [InlineData("1", "2", "3")]
         [InlineData("1", "2", "3", "4")]
-        public void InvalidNumberOfArgs(params string[] args)
+        [InlineData("1", "2", "3", "4", "5")]
+        public void Validate_Args_ReturnsInvalidNumber(params string[] args)
         {
-            ISequenceArgsValidator validator = new SequenceArgsValidator(args, 1, 2);
+            ISequenceArgsValidator validator = new SequenceArgsValidator(args, 1, 2, 2);
             ArgsValidatorResult result = validator.ValidateArgs();
 
             Assert.Equal(ArgsValidatorResult.InvalidNumberOfArgs, result);
@@ -36,9 +36,9 @@ namespace NumericalSequence.Tests
         [InlineData("1,3")]
         [InlineData("string")]
         [InlineData("1.5")]
-        public void InvalidTypeOfArgs(params string[] args)
+        public void Validate_Args_ReturnsInvalidType(params string[] args)
         {
-            ISequenceArgsValidator validator = new SequenceArgsValidator(args, 1, 2);
+            ISequenceArgsValidator validator = new SequenceArgsValidator(args, 1, 2, 2);
             ArgsValidatorResult result = validator.ValidateArgs();
 
             Assert.Equal(ArgsValidatorResult.InvalidTypeOfArgs, result);
@@ -48,9 +48,9 @@ namespace NumericalSequence.Tests
         [InlineData("-2")]
         [InlineData("-1")]
         [InlineData("1")]
-        public void InvalidValuesOfArgs(params string[] args)
+        public void Validate_Args_ReturnsInvalidValue(params string[] args)
         {
-            ISequenceArgsValidator validator = new SequenceArgsValidator(args, 1, 2);
+            ISequenceArgsValidator validator = new SequenceArgsValidator(args, 1, 2, 2);
             ArgsValidatorResult result = validator.ValidateArgs();
 
             Assert.Equal(ArgsValidatorResult.InvalidValue, result);
@@ -60,9 +60,9 @@ namespace NumericalSequence.Tests
         [InlineData("2")]
         [InlineData("173")]
         [InlineData("23213")]
-        public void ValidArgs(params string[] args)
+        public void Validate_Args_ReturnsValid(params string[] args)
         {
-            ISequenceArgsValidator validator = new SequenceArgsValidator(args, 1, 2);
+            ISequenceArgsValidator validator = new SequenceArgsValidator(args, 1, 2, 2);
             ArgsValidatorResult result = validator.ValidateArgs();
 
             Assert.Equal(ArgsValidatorResult.Success, result);

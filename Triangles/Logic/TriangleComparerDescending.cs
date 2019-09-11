@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TriangleSort
 {
-    public class SortTrianglesDescendingHelper : IComparer<Triangle>
+    public class TriangleComparerDescending : IComparer<Triangle>
     {
         public int Compare(Triangle x, Triangle y)
         {

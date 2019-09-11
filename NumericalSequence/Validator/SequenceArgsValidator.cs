@@ -11,13 +11,21 @@ namespace NumericalSequence
     {
         #region Private fields
 
-        private readonly int _minValue; 
+        private readonly int _minValue;
+        private readonly int _argsLengthForRange;
 
         #endregion
 
-        public SequenceArgsValidator(string[] args, int argsLength, int minValue) : base (args, argsLength)
+        public SequenceArgsValidator(string[] args, int argsLength, 
+            int argsLengthForRange, int minValue) : base (args, argsLength)
         {
             _minValue = minValue;
+            _argsLengthForRange = argsLengthForRange;
+        }
+
+        public override bool IsNumberOfArgsValid()
+        {
+            return Args.Length == _argsLength || Args.Length == _argsLengthForRange;
         }
 
         public bool IsValueValid(int value)
@@ -42,11 +50,14 @@ namespace NumericalSequence
                 return ArgsValidatorResult.InvalidTypeOfArgs;
             }
 
-            int value = Convert.ToInt32(Args[0]);
-
-            if (!IsValueValid(value))
+            foreach (var arg in Args)
             {
-                return ArgsValidatorResult.InvalidValue;
+                int value = Convert.ToInt32(arg);
+
+                if (!IsValueValid(value))
+                {
+                    return ArgsValidatorResult.InvalidValue;
+                }
             }
 
             return ArgsValidatorResult.Success;

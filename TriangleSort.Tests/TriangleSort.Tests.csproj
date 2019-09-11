@@ -57,7 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SortTrianglesDescendingHelperTests.cs" />
+    <Compile Include="TriangleComparerDescendingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TriangleArgsValidatorTests.cs" />
     <Compile Include="TriangleValidatorTests.cs" />

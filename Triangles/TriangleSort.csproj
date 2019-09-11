@@ -57,7 +57,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Logic\Triangle.cs" />
-    <Compile Include="Logic\SortTrianglesDescendingHelper.cs" />
+    <Compile Include="Logic\TriangleComparerDescending.cs" />
     <Compile Include="Validator\TriangleArgsValidator.cs" />
     <Compile Include="Validator\TriangleValidator.cs" />
   </ItemGroup>

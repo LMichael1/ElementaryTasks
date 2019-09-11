@@ -14,6 +14,7 @@ namespace NumericalSequence
         #region Constants
 
         private const int ARGS_LENGTH = 1;
+        private const int ARGS_LENGTH_FOR_RANGE = 2;
         private const int MIN_VALUE = 2;
 
         #endregion
@@ -28,7 +29,8 @@ namespace NumericalSequence
 
         public Application(string[] args)
         {
-            _validator = new SequenceArgsValidator(args, ARGS_LENGTH, MIN_VALUE);
+            _validator = new SequenceArgsValidator(args, ARGS_LENGTH, 
+                ARGS_LENGTH_FOR_RANGE, MIN_VALUE);
             _args = args;
         }
 
@@ -67,24 +69,43 @@ namespace NumericalSequence
 
         private void RunWithSequence(NumericalSequence sequence)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder();
 
             foreach (var i in sequence)
             {
-                sb.AppendFormat("{0}, ", i);
+                stringBuilder.AppendFormat("{0}, ", i);
             }
-            sb.Length -= 2;
 
-            ConsoleUI.ShowMessage(StringConstants.SEQUENCE);
-            ConsoleUI.ShowMessage(sb.ToString());
-            _logger.Info("Success");
+            if (stringBuilder.Length > 0)
+            {
+                stringBuilder.Length -= 2;
+
+                ConsoleUI.ShowMessage(StringConstants.SEQUENCE);
+                ConsoleUI.ShowMessage(stringBuilder.ToString());
+                _logger.Info("Success");
+            }
+            else
+            {
+                ConsoleUI.ShowMessage(StringConstants.NO_NUMBERS_IN_RANGE);
+                _logger.Warn("No numbers in range.");
+            }
         }
 
         private NumericalSequence GetSequence()
         {
-            int number = Convert.ToInt32(_args[0]);
+            int square;
 
-            return new NumericalSequence(number);
+            if (_args.Length == 1)
+            {
+                square = Convert.ToInt32(_args[0]);
+
+                return new NumericalSequence(square);
+            }
+
+            int startNumber = Convert.ToInt32(_args[0]);
+            square = Convert.ToInt32(_args[1]);
+
+            return new NumericalSequence(startNumber, square);
         }
 
     }
