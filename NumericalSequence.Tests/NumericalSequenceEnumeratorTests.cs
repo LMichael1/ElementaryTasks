@@ -14,10 +14,10 @@ namespace NumericalSequence.Tests
         [InlineData(0, 1)]
         [InlineData(7, 9)]
         [InlineData(15, 16)]
-        public void Get_ObjectCurrent_ReturnsCurrent(int start, int max)
+        public void test_PropertyObjectCurrent_withStartAndMaxNumber_shouldReturnMax(int start, int max)
         {
             IEnumerator enumerator = new NumericalSequenceEnumerator(start, max);
-
+           
             for (int i = start; i < max; i++)
             {
                 enumerator.MoveNext();
@@ -30,7 +30,7 @@ namespace NumericalSequence.Tests
         [InlineData(0, 1)]
         [InlineData(7, 9)]
         [InlineData(15, 16)]
-        public void Get_IntegerCurrent_ReturnsCurrent(int start, int max)
+        public void test_PropertyIntCurrent_withStartAndMaxNumber_shouldReturnMax(int start, int max)
         {
             NumericalSequenceEnumerator enumerator = new NumericalSequenceEnumerator(start, max);
 
