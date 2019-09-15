@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TriangleSort.Constants;
 using UserInterface;
 using Validation;
 
@@ -11,13 +12,6 @@ namespace TriangleSort
 {
     public class Application
     {
-        #region Constants
-
-        private const double MIN_SIDE = 0.0;
-        private const int ARGS_LENGTH = 4;
-
-        #endregion
-
         #region Fields
 
         private ITriangleArgsValidator _validator;
@@ -28,7 +22,8 @@ namespace TriangleSort
 
         public Application(string[] args)
         {
-            _validator = new TriangleArgsValidator(args, ARGS_LENGTH, MIN_SIDE);
+            _validator = new TriangleArgsValidator(args, 
+                NumericConstants.ARGS_LENGTH, NumericConstants.MIN_SIDE);
             _triangles = new List<Triangle>();
         }
 

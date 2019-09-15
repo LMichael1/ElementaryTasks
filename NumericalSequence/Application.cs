@@ -1,4 +1,5 @@
 ﻿using NLog;
+using NumericalSequence.Constants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +12,6 @@ namespace NumericalSequence
 {
     public class Application
     {
-        #region Constants
-
-        private const int ARGS_LENGTH = 1;
-        private const int ARGS_LENGTH_FOR_RANGE = 2;
-        private const int MIN_VALUE = 2;
-
-        #endregion
-
         #region Fields
 
         private readonly ISequenceArgsValidator _validator;
@@ -29,8 +22,8 @@ namespace NumericalSequence
 
         public Application(string[] args)
         {
-            _validator = new SequenceArgsValidator(args, ARGS_LENGTH, 
-                ARGS_LENGTH_FOR_RANGE, MIN_VALUE);
+            _validator = new SequenceArgsValidator(args, NumericConstants.ARGS_LENGTH,
+                NumericConstants.ARGS_LENGTH_FOR_RANGE, NumericConstants.MIN_VALUE);
             _args = args;
         }
 

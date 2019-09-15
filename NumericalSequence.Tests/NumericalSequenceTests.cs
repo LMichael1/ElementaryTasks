@@ -16,7 +16,7 @@ namespace NumericalSequence.Tests
         [InlineData(12, 225, 12, 13, 14)]
         [InlineData(1, 67, 1, 2, 3, 4, 5, 6, 7, 8)]
         [InlineData(2, 10, 2, 3)]
-        public void test_SequenceCreation_withMinNumberAndMaxSquare_shouldReturnSequence(int minSquare, int maxSquare, params int[] expected)
+        public void NumericalSequence_WithMinNumberAndMaxSquare_ShouldReturnSequence(int minSquare, int maxSquare, params int[] expected)
         {
             NumericalSequence sequence = new NumericalSequence(minSquare, maxSquare);
             int[] array = sequence.ToArray();
@@ -28,7 +28,7 @@ namespace NumericalSequence.Tests
         [InlineData(5, 1, 2)]
         [InlineData(16, 1, 2, 3)]
         [InlineData(2, 1)]
-        public void test_SequenceCreation_withMaxSquare_shouldReturnSequence(int maxSquare, params int[] expected)
+        public void NumericalSequence_WithMaxSquare_ShouldReturnSequence(int maxSquare, params int[] expected)
         {
             NumericalSequence sequence = new NumericalSequence(maxSquare);
             int[] array = sequence.ToArray();
