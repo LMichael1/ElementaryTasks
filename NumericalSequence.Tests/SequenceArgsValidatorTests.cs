@@ -15,7 +15,8 @@ namespace NumericalSequence.Tests
 
         public SequenceArgsValidatorTests()
         {
-            _validator = new SequenceArgsValidator(new string[0], NumericConstants.ARGS_LENGTH,
+            string[] args = new string[0];
+            _validator = new SequenceArgsValidator(args, NumericConstants.ARGS_LENGTH,
                 NumericConstants.ARGS_LENGTH_FOR_RANGE, NumericConstants.MIN_VALUE);
         }
 
