@@ -19,7 +19,8 @@ namespace TriangleSort.Tests
 
         public TriangleArgsValidatorTests()
         {
-            _validator = new TriangleArgsValidator(new string[0],
+            string[] args = new string[0];
+            _validator = new TriangleArgsValidator(args,
                 NumericConstants.ARGS_LENGTH, NumericConstants.MIN_SIDE);
         }
 
