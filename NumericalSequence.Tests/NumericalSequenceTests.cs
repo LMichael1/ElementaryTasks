@@ -35,17 +35,5 @@ namespace NumericalSequence.Tests
 
             Assert.Equal(expected, array);
         }
-
-        [Theory]
-        [InlineData(-1, -1)]
-        [InlineData(15, -15)]
-        [InlineData(0, 0)]
-        public void NumericalSequence_WithIncorrectNumbers_ShouldReturnEmptySequence(int minSquare, int maxSquare, params int[] expected)
-        {
-            NumericalSequence sequence = new NumericalSequence(minSquare, maxSquare);
-            int[] array = sequence.ToArray();
-
-            Assert.Equal(expected, array);
-        }
     }
 }
