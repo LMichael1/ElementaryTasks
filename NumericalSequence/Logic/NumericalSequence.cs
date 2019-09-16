@@ -20,15 +20,27 @@ namespace NumericalSequence
 
         public NumericalSequence(int square)
         {
+            if (square < 0)
+            {
+                _logger.Error("Argument is less than 0.");
+                throw new ArgumentOutOfRangeException(StringConstants.INVALID_FORMAT);
+            }
+
             _startNumber = 1;
             _maxNumber = GetMaxNumber(square);
 
-            _logger.Info("Sequence created. Square: {0}, Max number: {1}", 
+            _logger.Info("Sequence created. Square: {0}, Max number: {1}",
                 square, _maxNumber);
         }
 
         public NumericalSequence(int startNumber, int maxSquare)
         {
+            if (startNumber < 0 || maxSquare < 0)
+            {
+                _logger.Error("Argument is less than 0.");
+                throw new ArgumentOutOfRangeException(StringConstants.INVALID_FORMAT);
+            }
+
             _startNumber = startNumber;
             _maxNumber = GetMaxNumber(maxSquare);
 

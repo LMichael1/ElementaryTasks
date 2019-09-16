@@ -35,5 +35,25 @@ namespace NumericalSequence.Tests
 
             Assert.Equal(expected, array);
         }
+
+        [Theory]
+        [InlineData(-1)]
+        [InlineData(-16)]
+        [InlineData(-2)]
+        public void NumericalSequence_WithMaxSquareLessThanZero_ShouldThrowArgumentOutOfRangeException(int maxSquare)
+        {
+            NumericalSequence sequence;
+            Assert.Throws<ArgumentOutOfRangeException>(() => sequence = new NumericalSequence(maxSquare));
+        }
+
+        [Theory]
+        [InlineData(-1, -2)]
+        [InlineData(-16, -5)]
+        [InlineData(-2, -1)]
+        public void NumericalSequence_WithMinAndMaxSquareLessThanZero_ShouldThrowArgumentOutOfRangeException(int minSquare, int maxSquare)
+        {
+            NumericalSequence sequence;
+            Assert.Throws<ArgumentOutOfRangeException>(() => sequence = new NumericalSequence(minSquare, maxSquare));
+        }
     }
 }
